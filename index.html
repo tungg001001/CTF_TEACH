@@ -237,7 +237,7 @@
       </div>
     </section>
 
-    <!-- Tab 3: Interactive Tools Panel (7大題型內嵌解題工具) -->
+    <!-- Tab 3: Interactive Tools Panel -->
     <section id="tab-tools" class="tab-content hidden space-y-8">
       <div class="text-center max-w-4xl mx-auto space-y-2">
         <h2 class="text-3xl font-extrabold text-slate-900">7 大題型線上解題實用工具箱</h2>
@@ -491,7 +491,7 @@
     </div>
   </div>
 
-  <!-- Teacher Modal -->
+  <!-- Teacher Modal (增加了管理操作按鈕及登出) -->
   <div id="teacher-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
     <div class="bg-white rounded-2xl max-w-4xl w-full p-6 shadow-2xl border space-y-4 max-h-[90vh] flex flex-col">
       <div class="flex justify-between items-center border-b pb-3">
@@ -499,30 +499,50 @@
           <i class="fa-solid fa-graduation-cap text-2xl text-amber-500"></i>
           <h3 class="text-xl font-bold text-slate-900">教師管理專區 (GAS 連線驗證)</h3>
         </div>
-        <button onclick="closeTeacherModal()" class="text-slate-400 font-bold text-lg">✕</button>
+        <div class="flex items-center space-x-2">
+          <button id="btn-teacher-logout" onclick="logoutTeacherMode()" class="hidden bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center">
+            <i class="fa-solid fa-right-from-bracket mr-1"></i>登出專區
+          </button>
+          <button onclick="closeTeacherModal()" class="text-slate-400 hover:text-slate-600 font-bold text-lg px-1">✕</button>
+        </div>
       </div>
 
+      <!-- 密碼輸入解鎖畫面 -->
       <div id="teacher-lock-screen" class="text-center py-8 space-y-3">
         <i class="fa-solid fa-lock text-4xl text-slate-300"></i>
         <p class="text-sm text-slate-600">請輸入教師管理密碼 (送至 GAS 後端進行驗證)：</p>
         <div class="flex justify-center space-x-2 max-w-xs mx-auto">
-          <input type="password" id="teacher-pass-input" placeholder="請輸入管理密碼" class="px-3 py-2 border rounded-xl text-sm flex-grow focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <input type="password" id="teacher-pass-input" placeholder="請輸入管理密碼" class="px-3 py-2 border rounded-xl text-sm flex-grow focus:outline-none focus:ring-2 focus:ring-blue-500" onkeyup="if(event.key==='Enter') unlockTeacherModeWithGAS()">
           <button onclick="unlockTeacherModeWithGAS()" class="bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 rounded-xl text-sm font-bold transition">驗證解鎖</button>
         </div>
         <p id="teacher-pass-err" class="text-xs text-red-500 hidden"></p>
       </div>
 
+      <!-- 解鎖後管理內容 -->
       <div id="teacher-content" class="hidden space-y-6 overflow-y-auto flex-grow pr-1">
+        <!-- 控制選單按鈕列 -->
         <div class="flex flex-wrap items-center justify-between gap-3 bg-slate-50 p-3.5 rounded-xl border border-slate-200">
-          <button onclick="exportScoresToCSV()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition flex items-center shadow-sm">
-            <i class="fa-solid fa-file-csv mr-1.5 text-sm"></i>匯出全班成績 CSV 檔
+          <div class="flex flex-wrap items-center gap-2">
+            <button onclick="refreshTeacherScores()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-3.5 py-2 rounded-xl transition flex items-center shadow-sm">
+              <i class="fa-solid fa-rotate mr-1.5"></i>重新整理 / 更新資料
+            </button>
+            <button onclick="exportScoresToCSV()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-3.5 py-2 rounded-xl transition flex items-center shadow-sm">
+              <i class="fa-solid fa-file-csv mr-1.5"></i>匯出 CSV 檔
+            </button>
+          </div>
+          <button onclick="clearAllScoresFromGAS()" class="bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs px-3.5 py-2 rounded-xl transition flex items-center shadow-sm">
+            <i class="fa-solid fa-trash-can mr-1.5"></i>清空所有成績 (刪除舊資料)
           </button>
         </div>
 
         <div id="teacher-subtab-scores" class="space-y-3">
-          <h4 class="text-sm font-bold text-slate-800 flex items-center">
-            <i class="fa-solid fa-users text-blue-600 mr-2"></i>全班提交成績列表 (<span id="student-record-count">0</span> 筆)
-          </h4>
+          <div class="flex justify-between items-center">
+            <h4 class="text-sm font-bold text-slate-800 flex items-center">
+              <i class="fa-solid fa-users text-blue-600 mr-2"></i>全班提交成績列表 (<span id="student-record-count">0</span> 筆)
+            </h4>
+            <span id="teacher-status-msg" class="text-xs text-slate-500 font-semibold"></span>
+          </div>
+          
           <div class="overflow-x-auto border rounded-xl">
             <table class="w-full text-xs text-left text-slate-700">
               <thead class="bg-slate-100 text-slate-800 font-bold border-b">
@@ -533,6 +553,7 @@
                   <th class="p-2.5">姓名</th>
                   <th class="p-2.5">答對題數</th>
                   <th class="p-2.5">總得分</th>
+                  <th class="p-2.5 text-center">操作</th>
                 </tr>
               </thead>
               <tbody id="teacher-students-table" class="divide-y"></tbody>
@@ -545,7 +566,7 @@
 
   <!-- Javascript Engine -->
   <script>
-    var GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyPn6JF2IxOlOL37TbSQ5rIfZ0foRfRw-Vkn1fiVl4LcJUeuX0D5K967n8KbWvGftKc/exec";
+    var GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbywsRQGf79uxcsZXIpivp4lpnd-hiMKHy2Apq_yC6x-XJy1wloq_32DrUtTUh0bOGBp/exec";
 
     var challengesData = [
       { id: 'classic-1', cat: 'classic-crypto', catName: '古典密碼學', title: 'Caesar 凱撒移位密碼', points: 80, desc: '密文為 FGI{ndyvne_puvsg_pvcure}，請調整 Shift 位移數進行解密。' },
@@ -581,6 +602,7 @@
     var activeCategory = 'all';
     var currentChal = null;
     var fetchedStudentData = [];
+    var currentTeacherPass = ""; // 快取密碼於記憶體中
 
     document.addEventListener('DOMContentLoaded', function() {
       updateSolvedCount();
@@ -843,7 +865,6 @@
       var N = p * q;
       var phi = (p - 1) * (q - 1);
       
-      // 擴展歐幾里得法求模逆元 d
       function modInverse(a, m) {
         let m0 = m, y = 0, x = 1;
         if (m === 1) return 0;
@@ -931,7 +952,7 @@
       document.getElementById('tool-bf-output').innerText = output || "(無輸出或輸出無法顯示)";
     }
 
-    /* 教師 Modal 專區邏輯 */
+    /* 教師 Modal 專區邏輯 (包含新增之 更新、單筆/全刪、登出) */
     function openTeacherModal() {
       document.getElementById('teacher-modal').classList.remove('hidden');
     }
@@ -957,10 +978,12 @@
       .then(function(res) { return res.json(); })
       .then(function(data) {
         if(data.success) {
+          currentTeacherPass = pass; // 保存已驗證的密碼
           err.classList.add('hidden');
           document.getElementById('teacher-lock-screen').classList.add('hidden');
           document.getElementById('teacher-content').classList.remove('hidden');
-          fetchStudentScoresFromGAS(pass);
+          document.getElementById('btn-teacher-logout').classList.remove('hidden');
+          fetchStudentScoresFromGAS();
         } else {
           err.classList.remove('hidden');
           err.innerText = "密碼錯誤，請重新輸入！";
@@ -972,18 +995,42 @@
       });
     }
 
-    function fetchStudentScoresFromGAS(pass) {
+    function logoutTeacherMode() {
+      currentTeacherPass = "";
+      document.getElementById('teacher-pass-input').value = "";
+      document.getElementById('teacher-content').classList.add('hidden');
+      document.getElementById('btn-teacher-logout').classList.add('hidden');
+      document.getElementById('teacher-lock-screen').classList.remove('hidden');
+      closeTeacherModal();
+    }
+
+    function refreshTeacherScores() {
+      var msg = document.getElementById('teacher-status-msg');
+      msg.innerText = "更新資料中...";
+      fetchStudentScoresFromGAS();
+    }
+
+    function fetchStudentScoresFromGAS() {
+      if(!currentTeacherPass) return;
+      var msg = document.getElementById('teacher-status-msg');
+
       fetch(GAS_WEB_APP_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain' },
-        body: JSON.stringify({ action: "getScores", password: pass })
+        body: JSON.stringify({ action: "getScores", password: currentTeacherPass })
       })
       .then(function(res) { return res.json(); })
       .then(function(data) {
         if(data.success) {
           fetchedStudentData = data.records || [];
           renderTeacherTable(fetchedStudentData);
+          msg.innerText = "資料已同步 (" + new Date().toLocaleTimeString() + ")";
+        } else {
+          msg.innerText = "讀取失敗：" + data.message;
         }
+      })
+      .catch(function() {
+        msg.innerText = "網路連線異常";
       });
     }
 
@@ -992,7 +1039,7 @@
       tbody.innerHTML = '';
       document.getElementById('student-record-count').innerText = records.length;
 
-      records.forEach(function(r) {
+      records.forEach(function(r, index) {
         var tr = document.createElement('tr');
         tr.className = "hover:bg-slate-50";
         tr.innerHTML = '<td class="p-2.5 font-mono text-slate-500">' + r.time + '</td>' +
@@ -1000,8 +1047,60 @@
           '<td class="p-2.5">' + r.studentSeat + '</td>' +
           '<td class="p-2.5 font-semibold">' + r.studentName + '</td>' +
           '<td class="p-2.5 font-bold text-blue-600">' + r.solvedCount + ' / 21</td>' +
-          '<td class="p-2.5 font-extrabold text-amber-600">' + r.totalScore + ' pts</td>';
+          '<td class="p-2.5 font-extrabold text-amber-600">' + r.totalScore + ' pts</td>' +
+          '<td class="p-2.5 text-center">' +
+            '<button onclick="deleteSingleScoreFromGAS(\'' + r.time + '\', \'' + r.studentSeat + '\')" class="text-xs text-rose-600 hover:text-rose-800 font-bold px-2 py-1 bg-rose-50 rounded-lg hover:bg-rose-100 transition">刪除</button>' +
+          '</td>';
         tbody.appendChild(tr);
+      });
+    }
+
+    function deleteSingleScoreFromGAS(time, seat) {
+      if(!confirm("確定要刪除這筆學生測驗紀錄嗎？")) return;
+      var msg = document.getElementById('teacher-status-msg');
+      msg.innerText = "刪除單筆紀錄中...";
+
+      fetch(GAS_WEB_APP_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify({ 
+          action: "deleteScore", 
+          password: currentTeacherPass,
+          time: time,
+          studentSeat: seat
+        })
+      })
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        if(data.success) {
+          fetchStudentScoresFromGAS();
+        } else {
+          alert("刪除失敗: " + data.message);
+        }
+      });
+    }
+
+    function clearAllScoresFromGAS() {
+      if(!confirm("⚠️ 警告：這將會永久刪除 Google 試算表中的【所有學生成績】！確定要清空嗎？")) return;
+      var msg = document.getElementById('teacher-status-msg');
+      msg.innerText = "清空所有舊資料中...";
+
+      fetch(GAS_WEB_APP_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify({ 
+          action: "clearAllScores", 
+          password: currentTeacherPass
+        })
+      })
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        if(data.success) {
+          alert("已成功清空所有舊資料！");
+          fetchStudentScoresFromGAS();
+        } else {
+          alert("清空失敗: " + data.message);
+        }
       });
     }
 
