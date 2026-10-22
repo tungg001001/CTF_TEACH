@@ -2,7 +2,6 @@
 <html lang="zh-TW" class="h-full">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CyberLab CTF 資訊安全實戰與密碼學學習平台</title>
   <!-- Tailwind CSS -->
@@ -44,7 +43,7 @@
           <i class="fa-solid fa-book-bookmark mr-1.5"></i>密碼學核心原理
         </button>
         <button onclick="switchTab('guide')" id="nav-guide" class="nav-btn px-4 py-1.5 text-sm font-medium rounded-lg text-slate-600 hover:text-slate-900 transition-all">
-          <i class="fa-solid fa-screwdriver-wrench mr-1.5"></i>7大題型與線上工具
+          <i class="fa-solid fa-layer-group mr-1.5"></i>7大題型詳細介紹
         </button>
         <button onclick="switchTab('challenges')" id="nav-challenges" class="nav-btn px-4 py-1.5 text-sm font-medium rounded-lg text-slate-600 hover:text-slate-900 transition-all">
           <i class="fa-solid fa-vial mr-1.5"></i>線上互動測試 (21題)
@@ -82,7 +81,7 @@
               前往線上互動測試 <i class="fa-solid fa-arrow-right ml-1.5"></i>
             </button>
             <button onclick="switchTab('guide')" class="bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/20 px-5 py-2.5 rounded-xl text-sm font-semibold transition">
-              使用 7 大線上解題工具
+              查看 7 大題型詳細介紹
             </button>
           </div>
         </div>
@@ -131,139 +130,110 @@
       </div>
     </section>
 
-    <!-- Tab 2: Guides & Integrated Online Tools -->
+    <!-- Tab 2: Guides (詳細解說版) -->
     <section id="tab-guide" class="tab-content hidden space-y-8">
       <div class="text-center max-w-4xl mx-auto space-y-2">
-        <h2 class="text-3xl font-extrabold text-slate-900">7 大 CTF 題型詳細介紹與內建解題工具箱</h2>
-        <p class="text-slate-600 text-sm">除了原理說明，您可直接在此使用實用工具進行加密解密與分析！</p>
+        <h2 class="text-3xl font-extrabold text-slate-900">7 大 CTF 題型深度系統化解析</h2>
+        <p class="text-slate-600 text-sm">深入探索各領域漏洞發生的底層機制、攻擊手法與常用破解分析工具。</p>
       </div>
 
       <div class="grid lg:grid-cols-2 gap-6">
         
-        <!-- Tool 1: 古典密碼學爆破工具 -->
+        <!-- 1. 古典密碼學 -->
         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-          <div class="flex items-center justify-between border-b pb-3">
-            <div class="flex items-center space-x-3">
-              <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center font-bold text-sm">1</div>
-              <h3 class="text-base font-bold text-slate-900">古典密碼學：凱撒 / ROT13 移位爆破工具</h3>
-            </div>
-            <span class="text-xs bg-amber-50 text-amber-700 px-2 py-0.5 rounded font-medium">線上工具</span>
+          <div class="flex items-center space-x-3 border-b pb-3">
+            <div class="w-9 h-9 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center font-bold">1</div>
+            <h3 class="text-lg font-bold text-slate-900">古典密碼学 (Classical Cryptography)</h3>
           </div>
-          <div class="space-y-2">
-            <input type="text" id="tool1-input" placeholder="請輸入欲解密的密文，如: FGI{ndyvne...}" class="w-full text-xs font-mono p-2.5 border rounded-xl outline-none focus:ring-2 focus:ring-amber-500">
-            <button onclick="runToolCaesar()" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs py-2 rounded-xl transition">爆破所有 1~25 Shift 位移結果</button>
-            <div id="tool1-output" class="p-3 bg-slate-900 rounded-xl text-amber-400 font-mono text-xs max-h-36 overflow-y-auto">等待輸入並執行...</div>
+          <div class="space-y-2 text-xs text-slate-600 leading-relaxed">
+            <p><strong>底層原理：</strong> 建立在字元的「代換」與「位置置換」之上，不涉及高深數論，適合紙筆解密。</p>
+            <p><strong>常見漏洞：</strong> 存在嚴重的「字母頻率特徵」。多表代換若金鑰過短，可透過 Kasiski 測試估算長度破解。</p>
+            <p><strong>涵蓋題型：</strong> 凱撒移位密碼 (ROT13/Brute-force)、維吉尼亞多表密碼、籬笆位移密碼。</p>
+            <p><strong>常用工具：</strong> CyberChef, dcode.fr, Python 腳本。</p>
           </div>
         </div>
 
-        <!-- Tool 2: 現代密碼學 RSA 參數計算機 -->
+        <!-- 2. 現代密碼學 -->
         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-          <div class="flex items-center justify-between border-b pb-3">
-            <div class="flex items-center space-x-3">
-              <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-sm">2</div>
-              <h3 class="text-base font-bold text-slate-900">現代密碼學：RSA 模數 N 計算器</h3>
-            </div>
-            <span class="text-xs bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded font-medium">線上工具</span>
+          <div class="flex items-center space-x-3 border-b pb-3">
+            <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold">2</div>
+            <h3 class="text-lg font-bold text-slate-900">現代密碼學 (Modern Cryptography)</h3>
           </div>
-          <div class="space-y-2">
-            <div class="grid grid-cols-3 gap-2">
-              <input type="number" id="tool2-p" placeholder="質數 p (如 61)" class="text-xs p-2 border rounded-xl font-mono">
-              <input type="number" id="tool2-q" placeholder="質數 q (如 53)" class="text-xs p-2 border rounded-xl font-mono">
-              <input type="number" id="tool2-e" value="17" placeholder="公鑰 e" class="text-xs p-2 border rounded-xl font-mono">
-            </div>
-            <button onclick="runToolRSA()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-2 rounded-xl transition">計算 N 與 Phi(N)</button>
-            <div id="tool2-output" class="p-3 bg-slate-900 rounded-xl text-emerald-400 font-mono text-xs">等待輸入...</div>
+          <div class="space-y-2 text-xs text-slate-600 leading-relaxed">
+            <p><strong>底層原理：</strong> 建立在計算複雜性理論與數論難題之上，取決於金鑰長度與隨機性。</p>
+            <p><strong>常見漏洞：</strong> RSA 質數 p, q 過小遭分解；AES-CTR Nonce 重用導致 Key Stream 抵銷；MD5 弱型態 (0e) 碰撞。</p>
+            <p><strong>涵蓋題型：</strong> RSA 質因數分解、AES 金鑰流重用分析、MD5 弱型態比較繞過。</p>
+            <p><strong>常用工具：</strong> RsaCtfTool, Factordb, Hashcat, pycryptodome。</p>
           </div>
         </div>
 
-        <!-- Tool 3: Web 漏洞工具 (Payload 產生器) -->
+        <!-- 3. Web 漏洞利用 -->
         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-          <div class="flex items-center justify-between border-b pb-3">
-            <div class="flex items-center space-x-3">
-              <div class="w-8 h-8 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-sm">3</div>
-              <h3 class="text-base font-bold text-slate-900">Web 漏洞利用：常用 Payload 生成與編碼</h3>
-            </div>
-            <span class="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded font-medium">線上工具</span>
+          <div class="flex items-center space-x-3 border-b pb-3">
+            <div class="w-9 h-9 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center font-bold">3</div>
+            <h3 class="text-lg font-bold text-slate-900">Web 漏洞利用 (Web Exploitation)</h3>
           </div>
-          <div class="space-y-2">
-            <select id="tool3-type" class="w-full text-xs p-2 border rounded-xl outline-none">
-              <option value="sqli">SQLi 萬能密碼 (Bypass Auth)</option>
-              <option value="xss">Reflected XSS 腳本</option>
-              <option value="lfi">LFI 相對路徑穿越 (/etc/passwd)</option>
-            </select>
-            <button onclick="runToolWebPayload()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-2 rounded-xl transition">生成模組化 Payload</button>
-            <div id="tool3-output" class="p-3 bg-slate-900 rounded-xl text-blue-300 font-mono text-xs">點擊按鈕生成範例...</div>
+          <div class="space-y-2 text-xs text-slate-600 leading-relaxed">
+            <p><strong>底層原理：</strong> Web 應用未對使用者輸入進行驗證，導致輸入資料被伺服器或資料庫當成指令執行。</p>
+            <p><strong>常見漏洞：</strong> SQL 拼接語法繞過；XSS 注入觸發跨站腳本竊取 Cookie；LFI 相對路徑穿越讀取後端原始碼。</p>
+            <p><strong>涵蓋題型：</strong> SQL Injection 萬能密碼、Reflected XSS 腳本注入、LFI 本地檔案包含。</p>
+            <p><strong>常用工具：</strong> Burp Suite, sqlmap, dirsearch, Postman。</p>
           </div>
         </div>
 
-        <!-- Tool 4: Pwn Pattern 偏移量計算器 -->
+        <!-- 4. Pwn 二進位漏洞利用 -->
         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-          <div class="flex items-center justify-between border-b pb-3">
-            <div class="flex items-center space-x-3">
-              <div class="w-8 h-8 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center font-bold text-sm">4</div>
-              <h3 class="text-base font-bold text-slate-900">Pwn 二進位：Pattern 記憶體 Offset 生成器</h3>
-            </div>
-            <span class="text-xs bg-purple-50 text-purple-700 px-2 py-0.5 rounded font-medium">線上工具</span>
+          <div class="flex items-center space-x-3 border-b pb-3">
+            <div class="w-9 h-9 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center font-bold">4</div>
+            <h3 class="text-lg font-bold text-slate-900">Pwn 二進位漏洞利用 (Binary Exploitation)</h3>
           </div>
-          <div class="space-y-2">
-            <input type="number" id="tool4-len" value="32" placeholder="生成長度 (如 32)" class="w-full text-xs font-mono p-2 border rounded-xl">
-            <button onclick="runToolPwnPattern()" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs py-2 rounded-xl transition">生成循環字串用於計算測量溢位偏移</button>
-            <div id="tool4-output" class="p-3 bg-slate-900 rounded-xl text-purple-300 font-mono text-xs break-all">點擊生成...</div>
+          <div class="space-y-2 text-xs text-slate-600 leading-relaxed">
+            <p><strong>底層原理：</strong> C/C++ 等底層程式缺乏邊界檢查或記憶體管理不當，導致堆疊結構被破壞。</p>
+            <p><strong>常見漏洞：</strong> 堆疊溢位覆寫 Return Address；格式化字串 (%p/%x) 窺探記憶體；UAF 記憶體懸空指標重用。</p>
+            <p><strong>涵蓋題型：</strong> Stack Buffer Overflow, Format String Leak, Heap Use-After-Free。</p>
+            <p><strong>常用工具：</strong> Pwntools, gdb (pwndbg/gef), checksec。</p>
           </div>
         </div>
 
-        <!-- Tool 5: 逆向 XOR 加解密轉換器 -->
+        <!-- 5. 逆向工程 -->
         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-          <div class="flex items-center justify-between border-b pb-3">
-            <div class="flex items-center space-x-3">
-              <div class="w-8 h-8 rounded-lg bg-rose-100 text-rose-600 flex items-center justify-center font-bold text-sm">5</div>
-              <h3 class="text-base font-bold text-slate-900">逆向工程：XOR 邏輯運算與 Hex 檢視</h3>
-            </div>
-            <span class="text-xs bg-rose-50 text-rose-700 px-2 py-0.5 rounded font-medium">線上工具</span>
+          <div class="flex items-center space-x-3 border-b pb-3">
+            <div class="w-9 h-9 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center font-bold">5</div>
+            <h3 class="text-lg font-bold text-slate-900">逆向工程 (Reverse Engineering)</h3>
           </div>
-          <div class="space-y-2">
-            <div class="grid grid-cols-2 gap-2">
-              <input type="text" id="tool5-str" placeholder="字串或內文" class="text-xs p-2 border rounded-xl font-mono">
-              <input type="text" id="tool5-key" placeholder="Key (如 7)" class="text-xs p-2 border rounded-xl font-mono">
-            </div>
-            <button onclick="runToolXOR()" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs py-2 rounded-xl transition">執行單位元 XOR 運算</button>
-            <div id="tool5-output" class="p-3 bg-slate-900 rounded-xl text-rose-300 font-mono text-xs">等待輸入...</div>
+          <div class="space-y-2 text-xs text-slate-600 leading-relaxed">
+            <p><strong>底層原理：</strong> 將可執行檔反組譯或反編譯為組合語言，分析演算法與驗證金鑰邏輯。</p>
+            <p><strong>常見漏洞：</strong> 比對函數 (CMP/strcmp) 缺乏混淆保護；未脫殼的執行檔可被直接搜尋字串。</p>
+            <p><strong>涵蓋題型：</strong> XOR 加密算法逆向、x86 ASM 組合語言邏輯分析、UPX 脫殼與字串搜尋。</p>
+            <p><strong>常用工具：</strong> IDA Pro, Ghidra, x64dbg, Cutter, UPX。</p>
           </div>
         </div>
 
-        <!-- Tool 6: 數位鑑識 Magic Bytes 對照檢視器 -->
+        <!-- 6. 數位鑑識 -->
         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-          <div class="flex items-center justify-between border-b pb-3">
-            <div class="flex items-center space-x-3">
-              <div class="w-8 h-8 rounded-lg bg-teal-100 text-teal-600 flex items-center justify-center font-bold text-sm">6</div>
-              <h3 class="text-base font-bold text-slate-900">數位鑑識：常見檔案檔頭 (Magic Header) 對照表</h3>
-            </div>
-            <span class="text-xs bg-teal-50 text-teal-700 px-2 py-0.5 rounded font-medium">線上工具</span>
+          <div class="flex items-center space-x-3 border-b pb-3">
+            <div class="w-9 h-9 rounded-xl bg-teal-100 text-teal-600 flex items-center justify-center font-bold">6</div>
+            <h3 class="text-lg font-bold text-slate-900">數位鑑識 (Digital Forensics)</h3>
           </div>
-          <div class="space-y-2">
-            <select id="tool6-fmt" onchange="runToolMagicHeader()" class="w-full text-xs p-2 border rounded-xl outline-none">
-              <option value="png">PNG 圖片 (89 50 4E 47)</option>
-              <option value="jpg">JPG 圖片 (FF D8 FF)</option>
-              <option value="pdf">PDF 文件 (25 50 44 46)</option>
-              <option value="zip">ZIP 壓縮包 (50 4B 03 04)</option>
-            </select>
-            <div id="tool6-output" class="p-3 bg-slate-900 rounded-xl text-teal-300 font-mono text-xs">PNG Magic Header: 89 50 4E 47 0D 0A 1A 0A</div>
+          <div class="space-y-2 text-xs text-slate-600 leading-relaxed">
+            <p><strong>底層原理：</strong> 從記憶體快取、網路封包 (pcap) 或損毀檔案中，還原攻擊者留下的數位痕跡。</p>
+            <p><strong>常見漏洞：</strong> 傳輸敏感資訊未加密；損毀之圖檔 Magic Header 可被修復；記憶體殘留系統憑證。</p>
+            <p><strong>涵蓋題型：</strong> PNG Magic Header 16進位修復、Wireshark HTTP 封包提取、Memory Dump 記憶體分析。</p>
+            <p><strong>常用工具：</strong> Wireshark, Volatility, HxD, FTK Imager, foremost。</p>
           </div>
         </div>
 
-        <!-- Tool 7: Brainfuck 語言執行器 -->
+        <!-- 7. MISC 雜項與綜合 -->
         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4 lg:col-span-2">
-          <div class="flex items-center justify-between border-b pb-3">
-            <div class="flex items-center space-x-3">
-              <div class="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-sm">7</div>
-              <h3 class="text-base font-bold text-slate-900">MISC 雜項：Brainfuck 直譯器 (Online Interpreter)</h3>
-            </div>
-            <span class="text-xs bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded font-medium">線上工具</span>
+          <div class="flex items-center space-x-3 border-b pb-3">
+            <div class="w-9 h-9 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold">7</div>
+            <h3 class="text-lg font-bold text-slate-900">MISC 雜項與綜合 (Miscellaneous)</h3>
           </div>
-          <div class="space-y-2">
-            <input type="text" id="tool7-bf" value="+++++ [ > +++++++ < - ] > +. +++++." placeholder="輸入 Brainfuck 程式碼..." class="w-full text-xs font-mono p-2.5 border rounded-xl">
-            <button onclick="runToolBrainfuck()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs py-2 rounded-xl transition">執行解碼 Brainfuck 代碼</button>
-            <div id="tool7-output" class="p-3 bg-slate-900 rounded-xl text-indigo-300 font-mono text-xs">點擊執行...</div>
+          <div class="space-y-2 text-xs text-slate-600 leading-relaxed">
+            <p><strong>底層原理：</strong> 涵蓋無法歸類的綜合性安全技巧，包含圖片隱寫、特異語言與 AI 越獄等新興領域。</p>
+            <p><strong>常見漏洞：</strong> 圖片 LSB 最低位元藏有隱密訊息；Esolang 邏輯洩漏；LLM 未對 Prompt 進行適當邊界過濾。</p>
+            <p><strong>涵蓋題型：</strong> LSB 最低位元隱寫術、Brainfuck 直譯器執行、AI Prompt Injection 越獄測試。</p>
+            <p><strong>常用工具：</strong> zsteg, Stegsolve, CyberChef, Python Pillow 庫。</p>
           </div>
         </div>
 
@@ -498,79 +468,6 @@
 
         container.appendChild(card);
       });
-    }
-
-    // --- 線上解題工具箱邏輯 ---
-    function runToolCaesar() {
-      var input = document.getElementById('tool1-input').value;
-      var out = document.getElementById('tool1-output');
-      if(!input) { out.innerHTML = "請先輸入內容！"; return; }
-      var html = "";
-      for(var shift=1; shift<=25; shift++) {
-        var res = "";
-        for(var i=0; i<input.length; i++) {
-          var c = input.charCodeAt(i);
-          if(c>=65 && c<=90) res += String.fromCharCode((c-65+shift)%26 + 65);
-          else if(c>=97 && c<=122) res += String.fromCharCode((c-97+shift)%26 + 97);
-          else res += input.charAt(i);
-        }
-        html += "[Shift " + shift + "]: " + res + "<br>";
-      }
-      out.innerHTML = html;
-    }
-
-    function runToolRSA() {
-      var p = parseInt(document.getElementById('tool2-p').value);
-      var q = parseInt(document.getElementById('tool2-q').value);
-      var e = parseInt(document.getElementById('tool2-e').value);
-      var out = document.getElementById('tool2-output');
-      if(!p || !q || !e) { out.innerHTML = "請輸入完整 p, q, e 數值"; return; }
-      var n = p * q;
-      var phi = (p - 1) * (q - 1);
-      out.innerHTML = "N = " + n + "<br>Phi(N) = " + phi;
-    }
-
-    function runToolWebPayload() {
-      var type = document.getElementById('tool3-type').value;
-      var out = document.getElementById('tool3-output');
-      if(type === "sqli") out.innerText = "' OR '1'='1' -- \nadmin' -- \n' UNION SELECT 1,2,3-- ";
-      else if(type === "xss") out.innerText = "<script>alert('XSS')</script>\n<img src=x onerror=alert(1)>\n<svg onload=alert(document.cookie)>";
-      else if(type === "lfi") out.innerText = "../../../../etc/passwd\nphp://filter/convert.base64-encode/resource=index.php";
-    }
-
-    function runToolPwnPattern() {
-      var len = parseInt(document.getElementById('tool4-len').value) || 32;
-      var res = "";
-      var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-      for(var i=0; i<len; i++) res += chars[i % chars.length];
-      document.getElementById('tool4-output').innerText = res;
-    }
-
-    function runToolXOR() {
-      var str = document.getElementById('tool5-str').value;
-      var k = parseInt(document.getElementById('tool5-key').value) || 0;
-      var out = document.getElementById('tool5-output');
-      if(!str) { out.innerText = "請輸入字串"; return; }
-      var res = "";
-      for(var i=0; i<str.length; i++) {
-        res += String.fromCharCode(str.charCodeAt(i) ^ k);
-      }
-      out.innerText = "XOR 結果: " + res;
-    }
-
-    function runToolMagicHeader() {
-      var fmt = document.getElementById('tool6-fmt').value;
-      var out = document.getElementById('tool6-output');
-      if(fmt === 'png') out.innerText = "PNG Header: 89 50 4E 47 0D 0A 1A 0A";
-      else if(fmt === 'jpg') out.innerText = "JPG Header: FF D8 FF E0 / FF D8 FF E1";
-      else if(fmt === 'pdf') out.innerText = "PDF Header: 25 50 44 46";
-      else if(fmt === 'zip') out.innerText = "ZIP Header: 50 4B 03 04";
-    }
-
-    function runToolBrainfuck() {
-      var code = document.getElementById('tool7-bf').value;
-      var out = document.getElementById('tool7-output');
-      out.innerText = "解碼結果: Hello CTF";
     }
 
     function openChalModal(id) {
