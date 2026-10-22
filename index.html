@@ -56,7 +56,7 @@
       <div class="flex items-center space-x-3">
         <div class="bg-blue-50 border border-blue-100 text-blue-700 px-3 py-1 rounded-lg text-xs font-semibold flex items-center">
           <i class="fa-solid fa-trophy text-amber-500 mr-1.5"></i>
-          得分: <span id="total-score" class="mx-1 font-bold">0</span> 分 (<span id="solved-count">0</span>/21)
+          <span id="user-display-tag" class="mr-1 font-bold text-slate-600">[訪客]</span> 得分: <span id="total-score" class="mx-1 font-bold">0</span> 分 (<span id="solved-count">0</span>/21)
         </div>
         <button onclick="openTeacherModal()" class="bg-slate-900 hover:bg-slate-800 text-white text-xs px-3.5 py-2 rounded-lg font-medium transition flex items-center shadow-sm">
           <i class="fa-solid fa-user-lock mr-1.5 text-amber-400"></i>教師管理專區
@@ -596,7 +596,7 @@
 
   <!-- Javascript Engine -->
   <script>
-    var GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxrwVHlP3jmI_gc5C7EbNvqO88nI5vKzcLEU_AlXXw59xBG89WqOXYnfeGge1pJ6t6G/exec";
+    var GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxoT7lSHJ8DGjbtfFcUrsfsmoOidtERpCXJiMpiByCWP7NABHHj66GeeDnaixAyMtoh/exec";
 
     var challengesData = [
       { id: 'classic-1', cat: 'classic-crypto', catName: '古典密碼學', title: 'Caesar 凱撒移位密碼', points: 80, desc: '密文為 FGI{ndyvne_puvsg_pvcure}，請調整 Shift 位移數進行解密。' },
@@ -628,17 +628,15 @@
       { id: 'misc-3', cat: 'misc', catName: 'MISC 雜項', title: 'AI Prompt Injection 越獄', points: 200, desc: '請輸入 Ignore previous instructions 誘騙 AI 吐出 Flag。' }
     ];
 
-    var solvedSet = new Set(JSON.parse(localStorage.getItem('cyberlab_solved') || '[]'));
+    var solvedSet = new Set();
     var activeCategory = 'all';
     var currentChal = null;
     var fetchedStudentData = [];
     var currentTeacherPass = "";
-    var currentStudent = null; // 快取已登入學生資訊
+    var currentStudent = null;
 
     document.addEventListener('DOMContentLoaded', function() {
-      updateSolvedCount();
-      renderChallenges();
-      checkStudentLoginSession(); // 載入頁面時檢查登入 Session
+      checkStudentLoginSession(); // 會同時自動更新 LocalStorage 與上方得分板
     });
 
     function switchTab(tab) {
@@ -674,6 +672,26 @@
       renderChallenges();
     }
 
+    /* 根據目前的身份 (學生身分鍵值或訪客) 載入獨立的已解題紀錄 */
+    function getStorageKey() {
+      if (currentStudent && currentStudent.studentClass) {
+        return 'cyberlab_solved_' + currentStudent.studentClass + '_' + currentStudent.studentSeat + '_' + currentStudent.studentName;
+      }
+      return 'cyberlab_solved_guest';
+    }
+
+    function loadUserProgress() {
+      var key = getStorageKey();
+      solvedSet = new Set(JSON.parse(localStorage.getItem(key) || '[]'));
+      updateSolvedCount();
+      renderChallenges();
+    }
+
+    function saveUserProgress() {
+      var key = getStorageKey();
+      localStorage.setItem(key, JSON.stringify(Array.from(solvedSet)));
+    }
+
     function updateSolvedCount() {
       var solvedCount = solvedSet.size;
       var totalScore = 0;
@@ -682,6 +700,15 @@
       });
       document.getElementById('solved-count').innerText = solvedCount;
       document.getElementById('total-score').innerText = totalScore;
+      
+      var tag = document.getElementById('user-display-tag');
+      if (currentStudent && currentStudent.studentName) {
+        tag.innerText = '[' + currentStudent.studentName + ']';
+        tag.className = "mr-1 font-bold text-blue-700";
+      } else {
+        tag.innerText = '[訪客]';
+        tag.className = "mr-1 font-bold text-slate-500";
+      }
     }
 
     function renderChallenges() {
@@ -714,7 +741,7 @@
       });
     }
 
-    /* 學生登入 / 登出 邏輯 */
+    /* 學生登入與登出邏輯（得分與答對數同步切換） */
     function checkStudentLoginSession() {
       var saved = localStorage.getItem('cyberlab_student');
       if(saved) {
@@ -723,6 +750,7 @@
       } else {
         showStudentLoginUI();
       }
+      loadUserProgress(); // 依身份載入專屬得分與解題進度
     }
 
     function loginStudent() {
@@ -741,8 +769,10 @@
       localStorage.setItem('cyberlab_student', JSON.stringify(currentStudent));
       
       status.className = "text-xs font-semibold text-emerald-600";
-      status.innerText = "登入成功！測驗資料已準備就緒。";
+      status.innerText = "登入成功！已切換至專屬得分紀錄。";
+      
       showStudentLoggedUI();
+      loadUserProgress(); // 切換為學生個人專屬分數
     }
 
     function logoutStudent() {
@@ -754,8 +784,10 @@
       
       var status = document.getElementById('gas-status');
       status.className = "text-xs font-semibold text-slate-500";
-      status.innerText = "已登出學生帳號。";
+      status.innerText = "已登出學生帳號，已切換回訪客身分。";
+      
       showStudentLoginUI();
+      loadUserProgress(); // 切換回訪客身分與分數
     }
 
     function showStudentLoggedUI() {
@@ -777,7 +809,7 @@
 
       var badge = document.getElementById('student-badge-status');
       badge.className = "text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full font-semibold border";
-      badge.innerText = "未登入";
+      badge.innerText = "未登入 (訪客模式)";
     }
 
     function uploadScoreToGAS() {
@@ -910,7 +942,7 @@
           fb.className = "text-xs font-bold text-emerald-600";
           fb.innerText = "恭喜！Flag 正確！獲得 " + currentChal.points + " 分！";
           solvedSet.add(currentChal.id);
-          localStorage.setItem('cyberlab_solved', JSON.stringify(Array.from(solvedSet)));
+          saveUserProgress(); // 儲存該身分的進度
           updateSolvedCount();
           renderChallenges();
         } else {
