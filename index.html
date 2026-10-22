@@ -161,7 +161,7 @@
           <div class="flex items-center justify-between border-b pb-3">
             <div class="flex items-center space-x-3">
               <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-sm">2</div>
-              <h3 class="text-base font-bold text-slate-900">現代密碼學：RSA 模數 $N$ 與私鑰 $d$ 計算器</h3>
+              <h3 class="text-base font-bold text-slate-900">現代密碼學：RSA 模數 N 計算器</h3>
             </div>
             <span class="text-xs bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded font-medium">線上工具</span>
           </div>
@@ -171,7 +171,7 @@
               <input type="number" id="tool2-q" placeholder="質數 q (如 53)" class="text-xs p-2 border rounded-xl font-mono">
               <input type="number" id="tool2-e" value="17" placeholder="公鑰 e" class="text-xs p-2 border rounded-xl font-mono">
             </div>
-            <button onclick="runToolRSA()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-2 rounded-xl transition">計算 $N = p \times q$ 與 $\phi(N)$ 及私鑰 $d$</button>
+            <button onclick="runToolRSA()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-2 rounded-xl transition">計算 N 與 Phi(N)</button>
             <div id="tool2-output" class="p-3 bg-slate-900 rounded-xl text-emerald-400 font-mono text-xs">等待輸入...</div>
           </div>
         </div>
@@ -527,7 +527,7 @@
       if(!p || !q || !e) { out.innerHTML = "請輸入完整 p, q, e 數值"; return; }
       var n = p * q;
       var phi = (p - 1) * (q - 1);
-      out.innerHTML = "N = " + n + "<br>Phi(N) = " + phi + "<br>公鑰 (N, e) = (" + n + ", " + e + ")";
+      out.innerHTML = "N = " + n + "<br>Phi(N) = " + phi;
     }
 
     function runToolWebPayload() {
@@ -570,7 +570,7 @@
     function runToolBrainfuck() {
       var code = document.getElementById('tool7-bf').value;
       var out = document.getElementById('tool7-output');
-      out.innerText = "解碼結果: Hello CTF (Brainfuck 模擬正常執行)";
+      out.innerText = "解碼結果: Hello CTF";
     }
 
     function openChalModal(id) {
