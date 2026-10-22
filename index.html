@@ -131,7 +131,7 @@
       </div>
     </section>
 
-    <!-- Tab 2: Guides & Tools -->
+    <!-- Tab 2: Guides & Integrated Online Tools -->
     <section id="tab-guide" class="tab-content hidden space-y-8">
       <div class="text-center max-w-4xl mx-auto space-y-2">
         <h2 class="text-3xl font-extrabold text-slate-900">7 大 CTF 題型詳細介紹與內建解題工具箱</h2>
@@ -139,6 +139,8 @@
       </div>
 
       <div class="grid lg:grid-cols-2 gap-6">
+        
+        <!-- Tool 1: 古典密碼學爆破工具 -->
         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
           <div class="flex items-center justify-between border-b pb-3">
             <div class="flex items-center space-x-3">
@@ -148,12 +150,13 @@
             <span class="text-xs bg-amber-50 text-amber-700 px-2 py-0.5 rounded font-medium">線上工具</span>
           </div>
           <div class="space-y-2">
-            <input type="text" id="tool1-input" placeholder="請輸入欲解密的密文..." class="w-full text-xs font-mono p-2.5 border rounded-xl outline-none focus:ring-2 focus:ring-amber-500">
+            <input type="text" id="tool1-input" placeholder="請輸入欲解密的密文，如: FGI{ndyvne...}" class="w-full text-xs font-mono p-2.5 border rounded-xl outline-none focus:ring-2 focus:ring-amber-500">
             <button onclick="runToolCaesar()" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs py-2 rounded-xl transition">爆破所有 1~25 Shift 位移結果</button>
             <div id="tool1-output" class="p-3 bg-slate-900 rounded-xl text-amber-400 font-mono text-xs max-h-36 overflow-y-auto">等待輸入並執行...</div>
           </div>
         </div>
 
+        <!-- Tool 2: 現代密碼學 RSA 參數計算機 -->
         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
           <div class="flex items-center justify-between border-b pb-3">
             <div class="flex items-center space-x-3">
@@ -164,8 +167,8 @@
           </div>
           <div class="space-y-2">
             <div class="grid grid-cols-3 gap-2">
-              <input type="number" id="tool2-p" placeholder="質數 p" class="text-xs p-2 border rounded-xl font-mono">
-              <input type="number" id="tool2-q" placeholder="質數 q" class="text-xs p-2 border rounded-xl font-mono">
+              <input type="number" id="tool2-p" placeholder="質數 p (如 61)" class="text-xs p-2 border rounded-xl font-mono">
+              <input type="number" id="tool2-q" placeholder="質數 q (如 53)" class="text-xs p-2 border rounded-xl font-mono">
               <input type="number" id="tool2-e" value="17" placeholder="公鑰 e" class="text-xs p-2 border rounded-xl font-mono">
             </div>
             <button onclick="runToolRSA()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-2 rounded-xl transition">計算 N 與 Phi(N)</button>
@@ -173,6 +176,7 @@
           </div>
         </div>
 
+        <!-- Tool 3: Web 漏洞工具 (Payload 產生器) -->
         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
           <div class="flex items-center justify-between border-b pb-3">
             <div class="flex items-center space-x-3">
@@ -192,6 +196,7 @@
           </div>
         </div>
 
+        <!-- Tool 4: Pwn Pattern 偏移量計算器 -->
         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
           <div class="flex items-center justify-between border-b pb-3">
             <div class="flex items-center space-x-3">
@@ -201,12 +206,13 @@
             <span class="text-xs bg-purple-50 text-purple-700 px-2 py-0.5 rounded font-medium">線上工具</span>
           </div>
           <div class="space-y-2">
-            <input type="number" id="tool4-len" value="32" placeholder="生成長度" class="w-full text-xs font-mono p-2 border rounded-xl">
+            <input type="number" id="tool4-len" value="32" placeholder="生成長度 (如 32)" class="w-full text-xs font-mono p-2 border rounded-xl">
             <button onclick="runToolPwnPattern()" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs py-2 rounded-xl transition">生成循環字串用於計算測量溢位偏移</button>
             <div id="tool4-output" class="p-3 bg-slate-900 rounded-xl text-purple-300 font-mono text-xs break-all">點擊生成...</div>
           </div>
         </div>
 
+        <!-- Tool 5: 逆向 XOR 加解密轉換器 -->
         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
           <div class="flex items-center justify-between border-b pb-3">
             <div class="flex items-center space-x-3">
@@ -225,6 +231,7 @@
           </div>
         </div>
 
+        <!-- Tool 6: 數位鑑識 Magic Bytes 對照檢視器 -->
         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
           <div class="flex items-center justify-between border-b pb-3">
             <div class="flex items-center space-x-3">
@@ -244,6 +251,7 @@
           </div>
         </div>
 
+        <!-- Tool 7: Brainfuck 語言執行器 -->
         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4 lg:col-span-2">
           <div class="flex items-center justify-between border-b pb-3">
             <div class="flex items-center space-x-3">
@@ -258,11 +266,14 @@
             <div id="tool7-output" class="p-3 bg-slate-900 rounded-xl text-indigo-300 font-mono text-xs">點擊執行...</div>
           </div>
         </div>
+
       </div>
     </section>
 
     <!-- Tab 3: Challenges -->
     <section id="tab-challenges" class="tab-content hidden space-y-6">
+      
+      <!-- 學生個人資訊上傳區 -->
       <div class="bg-white rounded-2xl border border-blue-200 p-5 shadow-sm space-y-4">
         <div class="flex items-center justify-between border-b pb-3">
           <div class="flex items-center space-x-2">
@@ -293,6 +304,7 @@
         </div>
       </div>
 
+      <!-- 分類篩選按鈕 -->
       <div class="flex items-center space-x-2 overflow-x-auto pb-2">
         <button onclick="filterCat('all')" id="btn-cat-all" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-900 text-white shadow-sm whitespace-nowrap">全部題型 (21)</button>
         <button onclick="filterCat('classic-crypto')" id="btn-cat-classic-crypto" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold bg-white text-slate-600 border border-slate-200 whitespace-nowrap">1. 古典密碼學 (3)</button>
@@ -304,6 +316,7 @@
         <button onclick="filterCat('misc')" id="btn-cat-misc" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold bg-white text-slate-600 border border-slate-200 whitespace-nowrap">7. MISC 雜項 (3)</button>
       </div>
 
+      <!-- 題目卡片容器 -->
       <div id="challenge-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
     </section>
 
@@ -382,7 +395,7 @@
 
   <!-- Javascript Engine -->
   <script>
-    var GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycby_7ohVXDTdwhmB-VH7foPd-J5kzIZ39b3iLe_BFjmiPUt877rw7yy8PMdw-OwRHQOT/exec";
+    var GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyVwxpfkedvECTZ_3tESJxFV1mlqnx_t3J50EeaTo3uTkZjoJSA2dZxoDrK8S_guhUX/exec";
 
     var challengesData = [
       { id: 'classic-1', cat: 'classic-crypto', catName: '古典密碼學', title: 'Caesar 凱撒移位密碼', points: 80, desc: '密文為 FGI{ndyvne_puvsg_pvcure}，請調整 Shift 位移數進行解密。' },
@@ -487,6 +500,7 @@
       });
     }
 
+    // --- 線上解題工具箱邏輯 ---
     function runToolCaesar() {
       var input = document.getElementById('tool1-input').value;
       var out = document.getElementById('tool1-output');
