@@ -65,7 +65,7 @@
   <!-- Main Area -->
   <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
     
-    <!-- Tab 1: Overview -->
+    <!-- Tab 1: Overview - 密碼學原理專區 -->
     <section id="tab-overview" class="tab-content space-y-8">
       <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-slate-900 via-indigo-950 to-blue-950 text-white p-8 md:p-12 shadow-xl">
         <div class="relative z-10 max-w-3xl space-y-4">
@@ -88,6 +88,7 @@
       </div>
 
       <div class="grid md:grid-cols-2 gap-8">
+        <!-- 古典密碼學 -->
         <div class="bg-white rounded-2xl border border-slate-200 p-6 md:p-8 space-y-5 shadow-sm">
           <div class="flex items-center space-x-3 border-b pb-4">
             <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center font-bold text-lg">
@@ -108,6 +109,7 @@
           </div>
         </div>
 
+        <!-- 現代密碼學 -->
         <div class="bg-white rounded-2xl border border-slate-200 p-6 md:p-8 space-y-5 shadow-sm">
           <div class="flex items-center space-x-3 border-b pb-4">
             <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-lg">
@@ -294,6 +296,7 @@
 
   <!-- Javascript Engine -->
   <script>
+    // ⚠️ 請替換為您最新部署好的 GAS Web App URL
     var GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyVwxpfkedvECTZ_3tESJxFV1mlqnx_t3J50EeaTo3uTkZjoJSA2dZxoDrK8S_guhUX/exec";
 
     var challengesData = [
@@ -560,7 +563,6 @@
       document.getElementById('teacher-modal').classList.add('hidden');
     }
 
-    // 教師管理員密碼改由 GAS 後端比對驗證
     function unlockTeacherModeWithGAS() {
       var pwd = document.getElementById('teacher-pass-input').value.trim();
       var err = document.getElementById('teacher-pass-err');
