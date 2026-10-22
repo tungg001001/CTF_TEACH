@@ -45,6 +45,9 @@
         <button onclick="switchTab('guide')" id="nav-guide" class="nav-btn px-4 py-1.5 text-sm font-medium rounded-lg text-slate-600 hover:text-slate-900 transition-all">
           <i class="fa-solid fa-layer-group mr-1.5"></i>7大題型詳細介紹
         </button>
+        <button onclick="switchTab('tools')" id="nav-tools" class="nav-btn px-4 py-1.5 text-sm font-medium rounded-lg text-slate-600 hover:text-slate-900 transition-all">
+          <i class="fa-solid fa-screwdriver-wrench mr-1.5"></i>7大題型解題工具箱
+        </button>
         <button onclick="switchTab('challenges')" id="nav-challenges" class="nav-btn px-4 py-1.5 text-sm font-medium rounded-lg text-slate-600 hover:text-slate-900 transition-all">
           <i class="fa-solid fa-vial mr-1.5"></i>線上互動測試 (21題)
         </button>
@@ -79,6 +82,9 @@
           <div class="pt-2 flex flex-wrap gap-3">
             <button onclick="switchTab('challenges')" class="bg-blue-600 hover:bg-blue-500 text-white px-5 py-2.5 rounded-xl text-sm font-semibold shadow-lg shadow-blue-500/30 transition">
               前往線上互動測試 <i class="fa-solid fa-arrow-right ml-1.5"></i>
+            </button>
+            <button onclick="switchTab('tools')" class="bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition">
+              使用解題工具箱 <i class="fa-solid fa-wrench ml-1.5"></i>
             </button>
             <button onclick="switchTab('guide')" class="bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/20 px-5 py-2.5 rounded-xl text-sm font-semibold transition">
               查看 7 大題型詳細介紹
@@ -130,7 +136,7 @@
       </div>
     </section>
 
-    <!-- Tab 2: Guides (詳細解說版) -->
+    <!-- Tab 2: Guides -->
     <section id="tab-guide" class="tab-content hidden space-y-8">
       <div class="text-center max-w-4xl mx-auto space-y-2">
         <h2 class="text-3xl font-extrabold text-slate-900">7 大 CTF 題型深度系統化解析</h2>
@@ -138,12 +144,10 @@
       </div>
 
       <div class="grid lg:grid-cols-2 gap-6">
-        
-        <!-- 1. 古典密碼學 -->
         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
           <div class="flex items-center space-x-3 border-b pb-3">
             <div class="w-9 h-9 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center font-bold">1</div>
-            <h3 class="text-lg font-bold text-slate-900">古典密碼学 (Classical Cryptography)</h3>
+            <h3 class="text-lg font-bold text-slate-900">古典密碼學 (Classical Cryptography)</h3>
           </div>
           <div class="space-y-2 text-xs text-slate-600 leading-relaxed">
             <p><strong>底層原理：</strong> 建立在字元的「代換」與「位置置換」之上，不涉及高深數論，適合紙筆解密。</p>
@@ -153,7 +157,6 @@
           </div>
         </div>
 
-        <!-- 2. 現代密碼學 -->
         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
           <div class="flex items-center space-x-3 border-b pb-3">
             <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold">2</div>
@@ -167,7 +170,6 @@
           </div>
         </div>
 
-        <!-- 3. Web 漏洞利用 -->
         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
           <div class="flex items-center space-x-3 border-b pb-3">
             <div class="w-9 h-9 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center font-bold">3</div>
@@ -181,7 +183,6 @@
           </div>
         </div>
 
-        <!-- 4. Pwn 二進位漏洞利用 -->
         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
           <div class="flex items-center space-x-3 border-b pb-3">
             <div class="w-9 h-9 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center font-bold">4</div>
@@ -195,7 +196,6 @@
           </div>
         </div>
 
-        <!-- 5. 逆向工程 -->
         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
           <div class="flex items-center space-x-3 border-b pb-3">
             <div class="w-9 h-9 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center font-bold">5</div>
@@ -209,7 +209,6 @@
           </div>
         </div>
 
-        <!-- 6. 數位鑑識 -->
         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
           <div class="flex items-center space-x-3 border-b pb-3">
             <div class="w-9 h-9 rounded-xl bg-teal-100 text-teal-600 flex items-center justify-center font-bold">6</div>
@@ -223,7 +222,6 @@
           </div>
         </div>
 
-        <!-- 7. MISC 雜項與綜合 -->
         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4 lg:col-span-2">
           <div class="flex items-center space-x-3 border-b pb-3">
             <div class="w-9 h-9 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold">7</div>
@@ -236,11 +234,193 @@
             <p><strong>常用工具：</strong> zsteg, Stegsolve, CyberChef, Python Pillow 庫。</p>
           </div>
         </div>
-
       </div>
     </section>
 
-    <!-- Tab 3: Challenges -->
+    <!-- Tab 3: Interactive Tools Panel (7大題型內嵌解題工具) -->
+    <section id="tab-tools" class="tab-content hidden space-y-8">
+      <div class="text-center max-w-4xl mx-auto space-y-2">
+        <h2 class="text-3xl font-extrabold text-slate-900">7 大題型線上解題實用工具箱</h2>
+        <p class="text-slate-600 text-sm">提供無需安裝環境即可在網頁端運算的即時解析小工具，輔助解題與觀念驗證。</p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-6">
+        <!-- 1. 古典密碼學工具 -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+          <div class="flex items-center space-x-3 border-b pb-3">
+            <div class="w-9 h-9 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center font-bold">1</div>
+            <h3 class="text-base font-bold text-slate-900">古典密碼學：Caesar & Vigenere 運算器</h3>
+          </div>
+          <div class="space-y-3 text-xs">
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">輸入密文/明文：</label>
+              <input type="text" id="tool-classic-input" value="FGI{ndyvne_puvsg_pvcure}" class="w-full p-2 border rounded-xl font-mono text-xs focus:ring-2 focus:ring-amber-500 outline-none">
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Caesar Shift 位移 (-25 ~ +25):</label>
+                <input type="number" id="tool-caesar-shift" value="13" class="w-full p-2 border rounded-xl font-mono text-xs focus:ring-2 focus:ring-amber-500 outline-none">
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Vigenere Key 金鑰:</label>
+                <input type="text" id="tool-vigenere-key" value="LEMON" class="w-full p-2 border rounded-xl font-mono text-xs focus:ring-2 focus:ring-amber-500 outline-none">
+              </div>
+            </div>
+            <div class="flex space-x-2 pt-1">
+              <button onclick="runToolCaesar()" class="flex-1 bg-amber-600 hover:bg-amber-700 text-white py-1.5 rounded-xl font-bold transition">Caesar 移位</button>
+              <button onclick="runToolVigenere()" class="flex-1 bg-amber-700 hover:bg-amber-800 text-white py-1.5 rounded-xl font-bold transition">Vigenere 解密</button>
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">計算結果：</label>
+              <div id="tool-classic-output" class="p-2.5 bg-slate-900 text-amber-400 font-mono rounded-xl min-h-[40px] break-all"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. 現代密碼學工具 -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+          <div class="flex items-center space-x-3 border-b pb-3">
+            <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold">2</div>
+            <h3 class="text-base font-bold text-slate-900">現代密碼學：RSA 私鑰 d 與 XOR 運算</h3>
+          </div>
+          <div class="space-y-3 text-xs">
+            <div class="grid grid-cols-3 gap-2">
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">質數 p:</label>
+                <input type="number" id="tool-rsa-p" value="61" class="w-full p-2 border rounded-xl font-mono text-xs focus:ring-2 focus:ring-emerald-500 outline-none">
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">質數 q:</label>
+                <input type="number" id="tool-rsa-q" value="53" class="w-full p-2 border rounded-xl font-mono text-xs focus:ring-2 focus:ring-emerald-500 outline-none">
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">公鑰 e:</label>
+                <input type="number" id="tool-rsa-e" value="17" class="w-full p-2 border rounded-xl font-mono text-xs focus:ring-2 focus:ring-emerald-500 outline-none">
+              </div>
+            </div>
+            <button onclick="runToolRSA()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-1.5 rounded-xl font-bold transition">計算 N, phi(N) 與私鑰 d</button>
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">RSA 結果：</label>
+              <div id="tool-rsa-output" class="p-2.5 bg-slate-900 text-emerald-400 font-mono rounded-xl min-h-[40px] break-all">N=3233, phi=3120, d=2753</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Web 漏洞工具 -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+          <div class="flex items-center space-x-3 border-b pb-3">
+            <div class="w-9 h-9 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center font-bold">3</div>
+            <h3 class="text-base font-bold text-slate-900">Web 漏洞：URL / Base64 / SQLi 速查</h3>
+          </div>
+          <div class="space-y-3 text-xs">
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">字串編碼轉換：</label>
+              <input type="text" id="tool-web-input" value="admin' OR '1'='1" class="w-full p-2 border rounded-xl font-mono text-xs focus:ring-2 focus:ring-blue-500 outline-none">
+            </div>
+            <div class="flex space-x-2">
+              <button onclick="runToolWebEncode('url')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-1.5 rounded-xl font-bold transition">URL 編碼</button>
+              <button onclick="runToolWebEncode('b64e')" class="flex-1 bg-blue-700 hover:bg-blue-800 text-white py-1.5 rounded-xl font-bold transition">Base64 編碼</button>
+              <button onclick="runToolWebEncode('b64d')" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white py-1.5 rounded-xl font-bold transition">Base64 解碼</button>
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">轉換結果：</label>
+              <div id="tool-web-output" class="p-2.5 bg-slate-900 text-blue-400 font-mono rounded-xl min-h-[40px] break-all"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Pwn 漏洞工具 -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+          <div class="flex items-center space-x-3 border-b pb-3">
+            <div class="w-9 h-9 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center font-bold">4</div>
+            <h3 class="text-base font-bold text-slate-900">Pwn 二進位：Padding & Little-Endian 轉換</h3>
+          </div>
+          <div class="space-y-3 text-xs">
+            <div class="grid grid-cols-2 gap-2">
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Buffer Padding 長度:</label>
+                <input type="number" id="tool-pwn-len" value="16" class="w-full p-2 border rounded-xl font-mono text-xs focus:ring-2 focus:ring-purple-500 outline-none">
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Hex 位址 (例: 0xDEADBEEF):</label>
+                <input type="text" id="tool-pwn-hex" value="DEADBEEF" class="w-full p-2 border rounded-xl font-mono text-xs focus:ring-2 focus:ring-purple-500 outline-none">
+              </div>
+            </div>
+            <button onclick="runToolPwnGen()" class="w-full bg-purple-600 hover:bg-purple-700 text-white py-1.5 rounded-xl font-bold transition">生成 Payload 與 Little-Endian 位元組</button>
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">結果：</label>
+              <div id="tool-pwn-output" class="p-2.5 bg-slate-900 text-purple-300 font-mono rounded-xl min-h-[40px] break-all"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. 逆向工程工具 -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+          <div class="flex items-center space-x-3 border-b pb-3">
+            <div class="w-9 h-9 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center font-bold">5</div>
+            <h3 class="text-base font-bold text-slate-900">逆向工程：XOR 金鑰爆破與 16 進位轉整數</h3>
+          </div>
+          <div class="space-y-3 text-xs">
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">輸入 Hex 字串 (例: 0x1337 或 4919):</label>
+              <input type="text" id="tool-rev-input" value="0x1337" class="w-full p-2 border rounded-xl font-mono text-xs focus:ring-2 focus:ring-rose-500 outline-none">
+            </div>
+            <button onclick="runToolRevConvert()" class="w-full bg-rose-600 hover:bg-rose-700 text-white py-1.5 rounded-xl font-bold transition">進位轉換 (Hex ↔ Dec ↔ Bin)</button>
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">轉換結果：</label>
+              <div id="tool-rev-output" class="p-2.5 bg-slate-900 text-rose-300 font-mono rounded-xl min-h-[40px] break-all"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. 數位鑑識工具 -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+          <div class="flex items-center space-x-3 border-b pb-3">
+            <div class="w-9 h-9 rounded-xl bg-teal-100 text-teal-600 flex items-center justify-center font-bold">6</div>
+            <h3 class="text-base font-bold text-slate-900">數位鑑識：常見檔案 Magic Bytes 速查</h3>
+          </div>
+          <div class="space-y-2 text-xs">
+            <table class="w-full border text-left text-slate-700">
+              <thead class="bg-slate-100 font-bold border-b">
+                <tr>
+                  <th class="p-2">副檔名</th>
+                  <th class="p-2">Magic Bytes (Hex)</th>
+                  <th class="p-2">說明</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y font-mono">
+                <tr><td class="p-2 font-bold text-teal-700">PNG</td><td class="p-2">89 50 4E 47 0D 0A 1A 0A</td><td class="p-2">便攜式網路圖形</td></tr>
+                <tr><td class="p-2 font-bold text-teal-700">JPEG</td><td class="p-2">FF D8 FF E0 / FF D8 FF E1</td><td class="p-2">JPG 影像圖檔</td></tr>
+                <tr><td class="p-2 font-bold text-teal-700">ZIP</td><td class="p-2">50 4B 03 04</td><td class="p-2">壓縮檔 / Docx / Pkp</td></tr>
+                <tr><td class="p-2 font-bold text-teal-700">PDF</td><td class="p-2">25 50 44 46 ( %PDF )</td><td class="p-2">PDF 文件格式</td></tr>
+                <tr><td class="p-2 font-bold text-teal-700">ELF</td><td class="p-2">7F 45 4C 46 ( .ELF )</td><td class="p-2">Linux 可執行檔</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 7. MISC 雜項工具 -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4 lg:col-span-2">
+          <div class="flex items-center space-x-3 border-b pb-3">
+            <div class="w-9 h-9 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold">7</div>
+            <h3 class="text-base font-bold text-slate-900">MISC 雜項：Brainfuck 直譯器模擬器</h3>
+          </div>
+          <div class="space-y-3 text-xs">
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">輸入 Brainfuck 程式碼：</label>
+              <textarea id="tool-bf-input" rows="2" class="w-full p-2 border rounded-xl font-mono text-xs focus:ring-2 focus:ring-indigo-500 outline-none">+++++ +++++ [->++ +++++ <] >++. +++++ . <++++ +++++ [->-- ----- <] >--. </textarea>
+            </div>
+            <button onclick="runToolBrainfuck()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-1.5 rounded-xl font-bold transition">執行直譯器 (Execute)</button>
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">輸出結果 (ASCII)：</label>
+              <div id="tool-bf-output" class="p-2.5 bg-slate-900 text-indigo-300 font-mono rounded-xl min-h-[40px] break-all"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 4: Challenges -->
     <section id="tab-challenges" class="tab-content hidden space-y-6">
       
       <!-- 學生個人資訊上傳區 -->
@@ -440,6 +620,16 @@
       renderChallenges();
     }
 
+    function updateSolvedCount() {
+      var solvedCount = solvedSet.size;
+      var totalScore = 0;
+      challengesData.forEach(function(c) {
+        if (solvedSet.has(c.id)) totalScore += c.points;
+      });
+      document.getElementById('solved-count').innerText = solvedCount;
+      document.getElementById('total-score').innerText = totalScore;
+    }
+
     function renderChallenges() {
       var container = document.getElementById('challenge-container');
       if(!container) return;
@@ -563,66 +753,185 @@
       })
       .catch(function() {
         fb.className = "text-xs font-bold text-red-500";
-        fb.innerText = "連線 GAS 時發生錯誤！";
+        fb.innerText = "[ERROR] 後端驗證請求失敗。";
       });
-    }
-
-    function calculateTotalScore() {
-      var total = 0;
-      challengesData.forEach(function(c) {
-        if(solvedSet.has(c.id)) total += c.points;
-      });
-      return total;
-    }
-
-    function updateSolvedCount() {
-      document.getElementById('solved-count').innerText = solvedSet.size;
-      document.getElementById('total-score').innerText = calculateTotalScore();
     }
 
     function uploadScoreToGAS() {
-      var cls = document.getElementById('student-class').value.trim();
-      var seat = document.getElementById('student-seat').value.trim();
-      var name = document.getElementById('student-name').value.trim();
+      var sClass = document.getElementById('student-class').value.trim();
+      var sSeat = document.getElementById('student-seat').value.trim();
+      var sName = document.getElementById('student-name').value.trim();
       var status = document.getElementById('gas-status');
 
-      if(!cls || !seat || !name) {
-        status.className = "text-xs font-bold text-red-500";
-        status.innerText = "請完整填寫班級、座號與姓名！";
+      if(!sClass || !sSeat || !sName) {
+        status.className = "text-xs font-semibold text-red-500";
+        status.innerText = "請先完整填寫班級、座號與姓名！";
         return;
       }
 
-      var totalScore = calculateTotalScore();
-      status.className = "text-xs font-bold text-blue-600";
-      status.innerText = "資料連線儲存中，請稍候...";
+      var solvedCount = solvedSet.size;
+      var totalScore = 0;
+      challengesData.forEach(function(c) {
+        if (solvedSet.has(c.id)) totalScore += c.points;
+      });
+
+      status.className = "text-xs font-semibold text-blue-600";
+      status.innerText = "成績資料傳送至 GAS 系統中...";
 
       fetch(GAS_WEB_APP_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain' },
         body: JSON.stringify({
-          studentClass: cls,
-          seatNumber: seat,
-          studentName: name,
-          solvedCount: solvedSet.size,
-          score: totalScore
+          action: "submitScore",
+          studentClass: sClass,
+          studentSeat: sSeat,
+          studentName: sName,
+          solvedCount: solvedCount,
+          totalScore: totalScore
         })
       })
       .then(function(res) { return res.json(); })
       .then(function(data) {
-        if(data.status === "success") {
-          status.className = "text-xs font-bold text-emerald-600";
-          status.innerText = "成績成功送出並儲存至 GAS！(" + cls + "班 " + seat + "號 " + name + " - " + totalScore + "分)";
+        if(data.success) {
+          status.className = "text-xs font-semibold text-emerald-600";
+          status.innerText = "成績已成功儲存至 Google 試算表！(" + new Date().toLocaleTimeString() + ")";
         } else {
-          status.className = "text-xs font-bold text-red-500";
-          status.innerText = "儲存失敗：" + (data.message || '未知錯誤');
+          status.className = "text-xs font-semibold text-red-500";
+          status.innerText = "儲存失敗: " + data.message;
         }
       })
       .catch(function() {
-        status.className = "text-xs font-bold text-amber-600";
-        status.innerText = "連線 GAS 時發生錯誤";
+        status.className = "text-xs font-semibold text-red-500";
+        status.innerText = "[ERROR] 無法連線至 GAS 後端。";
       });
     }
 
+    /* 7大題型工具箱 JavaScript Functions */
+    function runToolCaesar() {
+      var text = document.getElementById('tool-classic-input').value;
+      var shift = parseInt(document.getElementById('tool-caesar-shift').value) || 0;
+      var out = text.replace(/[a-zA-Z]/g, function(c) {
+        var base = c >= 'a' ? 97 : 65;
+        return String.fromCharCode((c.charCodeAt(0) - base + shift + 26) % 26 + base);
+      });
+      document.getElementById('tool-classic-output').innerText = "Caesar 結果: " + out;
+    }
+
+    function runToolVigenere() {
+      var text = document.getElementById('tool-classic-input').value.toUpperCase();
+      var key = document.getElementById('tool-vigenere-key').value.toUpperCase();
+      if(!key) return;
+      var out = "";
+      var kIdx = 0;
+      for(var i=0; i<text.length; i++) {
+        var c = text.charCodeAt(i);
+        if(c >= 65 && c <= 90) {
+          var k = key.charCodeAt(kIdx % key.length) - 65;
+          out += String.fromCharCode((c - 65 - k + 26) % 26 + 65);
+          kIdx++;
+        } else {
+          out += text[i];
+        }
+      }
+      document.getElementById('tool-classic-output').innerText = "Vigenere 解密: " + out;
+    }
+
+    function runToolRSA() {
+      var p = parseInt(document.getElementById('tool-rsa-p').value) || 61;
+      var q = parseInt(document.getElementById('tool-rsa-q').value) || 53;
+      var e = parseInt(document.getElementById('tool-rsa-e').value) || 17;
+      var N = p * q;
+      var phi = (p - 1) * (q - 1);
+      
+      // 擴展歐幾里得法求模逆元 d
+      function modInverse(a, m) {
+        let m0 = m, y = 0, x = 1;
+        if (m === 1) return 0;
+        while (a > 1) {
+          let q = Math.floor(a / m);
+          let t = m;
+          m = a % m; a = t;
+          t = y;
+          y = x - q * y;
+          x = t;
+        }
+        if (x < 0) x += m0;
+        return x;
+      }
+
+      var d = modInverse(e, phi);
+      document.getElementById('tool-rsa-output').innerText = "N = " + N + " | phi(N) = " + phi + " | 私鑰 d = " + d;
+    }
+
+    function runToolWebEncode(type) {
+      var input = document.getElementById('tool-web-input').value;
+      var out = "";
+      try {
+        if(type === 'url') out = encodeURIComponent(input);
+        else if(type === 'b64e') out = btoa(input);
+        else if(type === 'b64d') out = atob(input);
+      } catch(e) {
+        out = "錯誤: " + e.message;
+      }
+      document.getElementById('tool-web-output').innerText = out;
+    }
+
+    function runToolPwnGen() {
+      var len = parseInt(document.getElementById('tool-pwn-len').value) || 16;
+      var hex = document.getElementById('tool-pwn-hex').value.replace('0x','').trim();
+      
+      var pad = "A".repeat(len);
+      var leBytes = "";
+      for(var i = hex.length - 2; i >= 0; i -= 2) {
+        leBytes += "\\x" + hex.substr(i, 2);
+      }
+      document.getElementById('tool-pwn-output').innerText = "Payload: " + pad + " + Little-Endian: " + leBytes;
+    }
+
+    function runToolRevConvert() {
+      var input = document.getElementById('tool-rev-input').value.trim();
+      var num = input.startsWith('0x') || input.startsWith('0X') ? parseInt(input, 16) : parseInt(input, 10);
+      if(isNaN(num)) {
+        document.getElementById('tool-rev-output').innerText = "請輸入有效的數值！";
+        return;
+      }
+      document.getElementById('tool-rev-output').innerText = "Dec: " + num + " | Hex: 0x" + num.toString(16).toUpperCase() + " | Bin: " + num.toString(2);
+    }
+
+    function runToolBrainfuck() {
+      var code = document.getElementById('tool-bf-input').value;
+      var memory = new Uint8Array(30000);
+      var ptr = 0, ip = 0, output = "";
+      var loops = [];
+
+      while(ip < code.length) {
+        var cmd = code[ip];
+        if(cmd === '>') ptr++;
+        else if(cmd === '<') ptr--;
+        else if(cmd === '+') memory[ptr]++;
+        else if(cmd === '-') memory[ptr]--;
+        else if(cmd === '.') output += String.fromCharCode(memory[ptr]);
+        else if(cmd === '[') {
+          if(memory[ptr] === 0) {
+            var openLoops = 1;
+            while(openLoops > 0 && ip < code.length - 1) {
+              ip++;
+              if(code[ip] === '[') openLoops++;
+              if(code[ip] === ']') openLoops--;
+            }
+          } else {
+            loops.push(ip);
+          }
+        } else if(cmd === ']') {
+          if(memory[ptr] !== 0) ip = loops[loops.length - 1];
+          else loops.pop();
+        }
+        ip++;
+      }
+      document.getElementById('tool-bf-output').innerText = output || "(無輸出或輸出無法顯示)";
+    }
+
+    /* 教師 Modal 專區邏輯 */
     function openTeacherModal() {
       document.getElementById('teacher-modal').classList.remove('hidden');
     }
@@ -632,97 +941,81 @@
     }
 
     function unlockTeacherModeWithGAS() {
-      var pwd = document.getElementById('teacher-pass-input').value.trim();
+      var pass = document.getElementById('teacher-pass-input').value.trim();
       var err = document.getElementById('teacher-pass-err');
 
-      if (!pwd) {
-        err.innerText = "請輸入密碼！";
-        err.classList.remove('hidden');
-        return;
-      }
+      if(!pass) return;
 
-      err.className = "text-xs text-blue-500";
-      err.innerText = "驗證中...";
       err.classList.remove('hidden');
+      err.innerText = "驗證密碼中...";
 
       fetch(GAS_WEB_APP_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain' },
-        body: JSON.stringify({ action: "verifyTeacher", password: pwd })
+        body: JSON.stringify({ action: "verifyTeacherPass", password: pass })
       })
       .then(function(res) { return res.json(); })
       .then(function(data) {
-        if (data.success) {
+        if(data.success) {
+          err.classList.add('hidden');
           document.getElementById('teacher-lock-screen').classList.add('hidden');
           document.getElementById('teacher-content').classList.remove('hidden');
-          err.classList.add('hidden');
-          fetchStudentScoresFromGAS();
+          fetchStudentScoresFromGAS(pass);
         } else {
-          err.className = "text-xs text-red-500";
-          err.innerText = data.message;
           err.classList.remove('hidden');
+          err.innerText = "密碼錯誤，請重新輸入！";
         }
       })
       .catch(function() {
-        err.className = "text-xs text-red-500";
-        err.innerText = "驗證連線失敗，請稍後再試！";
         err.classList.remove('hidden');
+        err.innerText = "連線驗證失敗！";
       });
     }
 
-    function fetchStudentScoresFromGAS() {
-      fetch(GAS_WEB_APP_URL)
+    function fetchStudentScoresFromGAS(pass) {
+      fetch(GAS_WEB_APP_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify({ action: "getScores", password: pass })
+      })
       .then(function(res) { return res.json(); })
       .then(function(data) {
-        fetchedStudentData = data || [];
-        renderStudentTable(fetchedStudentData);
-      })
-      .catch(function() {
-        console.log('無法從 GAS 取得成績資料');
+        if(data.success) {
+          fetchedStudentData = data.records || [];
+          renderTeacherTable(fetchedStudentData);
+        }
       });
     }
 
-    function renderStudentTable(data) {
+    function renderTeacherTable(records) {
       var tbody = document.getElementById('teacher-students-table');
-      document.getElementById('student-record-count').innerText = data.length;
       tbody.innerHTML = '';
+      document.getElementById('student-record-count').innerText = records.length;
 
-      if(data.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="6" class="p-4 text-center text-slate-400">目前尚無學生上傳成績紀錄</td></tr>';
-        return;
-      }
-
-      data.forEach(function(row) {
+      records.forEach(function(r) {
         var tr = document.createElement('tr');
-        tr.innerHTML = '<td class="p-2.5 text-slate-500">' + (row.timestamp || '-') + '</td>' +
-                       '<td class="p-2.5 font-bold">' + row.studentClass + '</td>' +
-                       '<td class="p-2.5">' + row.seatNumber + '</td>' +
-                       '<td class="p-2.5 font-bold">' + row.studentName + '</td>' +
-                       '<td class="p-2.5">' + row.solvedCount + ' / 21</td>' +
-                       '<td class="p-2.5 font-extrabold text-amber-600">' + row.score + ' pts</td>';
+        tr.className = "hover:bg-slate-50";
+        tr.innerHTML = '<td class="p-2.5 font-mono text-slate-500">' + r.time + '</td>' +
+          '<td class="p-2.5 font-bold">' + r.studentClass + '</td>' +
+          '<td class="p-2.5">' + r.studentSeat + '</td>' +
+          '<td class="p-2.5 font-semibold">' + r.studentName + '</td>' +
+          '<td class="p-2.5 font-bold text-blue-600">' + r.solvedCount + ' / 21</td>' +
+          '<td class="p-2.5 font-extrabold text-amber-600">' + r.totalScore + ' pts</td>';
         tbody.appendChild(tr);
       });
     }
 
     function exportScoresToCSV() {
-      if(fetchedStudentData.length === 0) {
-        alert("尚無成績資料可供匯出！");
-        return;
-      }
-
-      var csvContent = "\uFEFF提交時間,班級,座號,姓名,解題數,總分\n";
-      fetchedStudentData.forEach(function(row) {
-        csvContent += '"' + (row.timestamp || '') + '","' + row.studentClass + '","' + row.seatNumber + '","' + row.studentName + '","' + row.solvedCount + '","' + row.score + '"\n';
+      if(fetchedStudentData.length === 0) return alert('無成績紀錄可匯出');
+      var csv = "\uFEFF提交時間,班級,座號,姓名,答對題數,總得分\n";
+      fetchedStudentData.forEach(function(r) {
+        csv += '"' + r.time + '","' + r.studentClass + '","' + r.studentSeat + '","' + r.studentName + '",' + r.solvedCount + ',' + r.totalScore + '\n';
       });
-
-      var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-      var url = URL.createObjectURL(blob);
+      var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
       var link = document.createElement("a");
-      link.setAttribute("href", url);
-      link.setAttribute("download", "CTF_成績紀錄表.csv");
-      document.body.appendChild(link);
+      link.href = URL.createObjectURL(blob);
+      link.download = "CyberLab_CTF_Scores.csv";
       link.click();
-      document.body.removeChild(link);
     }
   </script>
 </body>
