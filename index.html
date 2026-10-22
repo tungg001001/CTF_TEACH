@@ -423,35 +423,66 @@
     <!-- Tab 4: Challenges -->
     <section id="tab-challenges" class="tab-content hidden space-y-6">
       
-      <!-- 學生個人資訊上傳區 -->
+      <!-- 學生個人資訊與登入/登出專區 -->
       <div class="bg-white rounded-2xl border border-blue-200 p-5 shadow-sm space-y-4">
         <div class="flex items-center justify-between border-b pb-3">
           <div class="flex items-center space-x-2">
             <i class="fa-solid fa-address-card text-blue-600 text-lg"></i>
-            <h3 class="font-bold text-slate-900">學生測驗個人資訊與成績儲存 (送出至 GAS)</h3>
+            <h3 class="font-bold text-slate-900">學生測驗帳號登入與成績儲存 (送出至 GAS)</h3>
           </div>
-          <span class="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-semibold border border-blue-100">測驗評量模式</span>
+          <span id="student-badge-status" class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full font-semibold border">未登入</span>
         </div>
-        <div class="grid sm:grid-cols-3 gap-4">
-          <div>
-            <label class="block text-xs font-bold text-slate-600 mb-1">班級 (例如: 101)</label>
-            <input type="text" id="student-class" placeholder="請輸入班級" class="w-full text-xs p-2.5 border rounded-xl focus:ring-2 focus:ring-blue-500 outline-none">
+
+        <!-- 1. 未登入狀態面板 -->
+        <div id="student-login-panel" class="space-y-3">
+          <div class="grid sm:grid-cols-3 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-600 mb-1">班級 (例如: 101)</label>
+              <input type="text" id="student-class" placeholder="請輸入班級" class="w-full text-xs p-2.5 border rounded-xl focus:ring-2 focus:ring-blue-500 outline-none">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-600 mb-1">座號 (例如: 05)</label>
+              <input type="text" id="student-seat" placeholder="請輸入座號" class="w-full text-xs p-2.5 border rounded-xl focus:ring-2 focus:ring-blue-500 outline-none">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-600 mb-1">姓名 (例如: 王小明)</label>
+              <input type="text" id="student-name" placeholder="請輸入姓名" class="w-full text-xs p-2.5 border rounded-xl focus:ring-2 focus:ring-blue-500 outline-none">
+            </div>
           </div>
-          <div>
-            <label class="block text-xs font-bold text-slate-600 mb-1">座號 (例如: 05)</label>
-            <input type="text" id="student-seat" placeholder="請輸入座號" class="w-full text-xs p-2.5 border rounded-xl focus:ring-2 focus:ring-blue-500 outline-none">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-slate-600 mb-1">姓名 (例如: 王小明)</label>
-            <input type="text" id="student-name" placeholder="請輸入姓名" class="w-full text-xs p-2.5 border rounded-xl focus:ring-2 focus:ring-blue-500 outline-none">
+          <div class="flex justify-end pt-1">
+            <button onclick="loginStudent()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-6 py-2.5 rounded-xl transition flex items-center shadow-sm">
+              <i class="fa-solid fa-right-to-bracket mr-1.5"></i>學生登入測驗帳號
+            </button>
           </div>
         </div>
-        <div class="flex flex-wrap items-center justify-between gap-2 pt-2">
-          <div id="gas-status" class="text-xs font-semibold text-slate-500 min-h-[20px]">測驗完成後，請點擊「送出成績」儲存至系統。</div>
-          <button onclick="uploadScoreToGAS()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-6 py-2.5 rounded-xl transition flex items-center shadow-sm">
-            <i class="fa-solid fa-paper-plane mr-1.5"></i>送出成績儲存至 GAS
-          </button>
+
+        <!-- 2. 已登入狀態面板 -->
+        <div id="student-logged-panel" class="hidden flex flex-wrap items-center justify-between gap-4 bg-blue-50/60 p-4 rounded-xl border border-blue-100">
+          <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-lg shadow-sm">
+              <i class="fa-solid fa-user-graduate"></i>
+            </div>
+            <div>
+              <div class="text-xs text-slate-500">目前登入學生：</div>
+              <div class="text-sm font-extrabold text-blue-900">
+                <span id="display-student-class">101</span> 班 
+                <span id="display-student-seat">05</span> 號 - 
+                <span id="display-student-name">王小明</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-center space-x-2">
+            <button onclick="uploadScoreToGAS()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-5 py-2.5 rounded-xl transition flex items-center shadow-sm">
+              <i class="fa-solid fa-paper-plane mr-1.5"></i>送出成績儲存至 GAS
+            </button>
+            <button onclick="logoutStudent()" class="bg-white hover:bg-slate-100 text-slate-600 border border-slate-200 font-bold text-xs px-4 py-2.5 rounded-xl transition flex items-center">
+              <i class="fa-solid fa-right-from-bracket mr-1.5 text-slate-400"></i>切換帳號 / 登出
+            </button>
+          </div>
         </div>
+
+        <div id="gas-status" class="text-xs font-semibold text-slate-500 min-h-[20px]">登入後即可將測驗結果儲存至教師端後端系統。</div>
       </div>
 
       <!-- 分類篩選按鈕 -->
@@ -491,7 +522,7 @@
     </div>
   </div>
 
-  <!-- Teacher Modal (增加了管理操作按鈕及登出) -->
+  <!-- Teacher Modal -->
   <div id="teacher-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
     <div class="bg-white rounded-2xl max-w-4xl w-full p-6 shadow-2xl border space-y-4 max-h-[90vh] flex flex-col">
       <div class="flex justify-between items-center border-b pb-3">
@@ -520,7 +551,6 @@
 
       <!-- 解鎖後管理內容 -->
       <div id="teacher-content" class="hidden space-y-6 overflow-y-auto flex-grow pr-1">
-        <!-- 控制選單按鈕列 -->
         <div class="flex flex-wrap items-center justify-between gap-3 bg-slate-50 p-3.5 rounded-xl border border-slate-200">
           <div class="flex flex-wrap items-center gap-2">
             <button onclick="refreshTeacherScores()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-3.5 py-2 rounded-xl transition flex items-center shadow-sm">
@@ -566,7 +596,7 @@
 
   <!-- Javascript Engine -->
   <script>
-    var GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbywsRQGf79uxcsZXIpivp4lpnd-hiMKHy2Apq_yC6x-XJy1wloq_32DrUtTUh0bOGBp/exec";
+    var GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyVwxpfkedvECTZ_3tESJxFV1mlqnx_t3J50EeaTo3uTkZjoJSA2dZxoDrK8S_guhUX/exec";
 
     var challengesData = [
       { id: 'classic-1', cat: 'classic-crypto', catName: '古典密碼學', title: 'Caesar 凱撒移位密碼', points: 80, desc: '密文為 FGI{ndyvne_puvsg_pvcure}，請調整 Shift 位移數進行解密。' },
@@ -602,11 +632,13 @@
     var activeCategory = 'all';
     var currentChal = null;
     var fetchedStudentData = [];
-    var currentTeacherPass = ""; // 快取密碼於記憶體中
+    var currentTeacherPass = "";
+    var currentStudent = null; // 快取已登入學生資訊
 
     document.addEventListener('DOMContentLoaded', function() {
       updateSolvedCount();
       renderChallenges();
+      checkStudentLoginSession(); // 載入頁面時檢查登入 Session
     });
 
     function switchTab(tab) {
@@ -682,6 +714,119 @@
       });
     }
 
+    /* 學生登入 / 登出 邏輯 */
+    function checkStudentLoginSession() {
+      var saved = localStorage.getItem('cyberlab_student');
+      if(saved) {
+        currentStudent = JSON.parse(saved);
+        showStudentLoggedUI();
+      } else {
+        showStudentLoginUI();
+      }
+    }
+
+    function loginStudent() {
+      var sClass = document.getElementById('student-class').value.trim();
+      var sSeat = document.getElementById('student-seat').value.trim();
+      var sName = document.getElementById('student-name').value.trim();
+      var status = document.getElementById('gas-status');
+
+      if(!sClass || !sSeat || !sName) {
+        status.className = "text-xs font-semibold text-red-500";
+        status.innerText = "請完整輸入班級、座號與姓名才能進行登入！";
+        return;
+      }
+
+      currentStudent = { studentClass: sClass, studentSeat: sSeat, studentName: sName };
+      localStorage.setItem('cyberlab_student', JSON.stringify(currentStudent));
+      
+      status.className = "text-xs font-semibold text-emerald-600";
+      status.innerText = "登入成功！測驗資料已準備就緒。";
+      showStudentLoggedUI();
+    }
+
+    function logoutStudent() {
+      currentStudent = null;
+      localStorage.removeItem('cyberlab_student');
+      document.getElementById('student-class').value = '';
+      document.getElementById('student-seat').value = '';
+      document.getElementById('student-name').value = '';
+      
+      var status = document.getElementById('gas-status');
+      status.className = "text-xs font-semibold text-slate-500";
+      status.innerText = "已登出學生帳號。";
+      showStudentLoginUI();
+    }
+
+    function showStudentLoggedUI() {
+      document.getElementById('student-login-panel').classList.add('hidden');
+      document.getElementById('student-logged-panel').classList.remove('hidden');
+      
+      document.getElementById('display-student-class').innerText = currentStudent.studentClass;
+      document.getElementById('display-student-seat').innerText = currentStudent.studentSeat;
+      document.getElementById('display-student-name').innerText = currentStudent.studentName;
+
+      var badge = document.getElementById('student-badge-status');
+      badge.className = "text-xs bg-emerald-50 text-emerald-700 border-emerald-200 px-2.5 py-1 rounded-full font-bold border";
+      badge.innerText = "已登入：" + currentStudent.studentName;
+    }
+
+    function showStudentLoginUI() {
+      document.getElementById('student-login-panel').classList.remove('hidden');
+      document.getElementById('student-logged-panel').classList.add('hidden');
+
+      var badge = document.getElementById('student-badge-status');
+      badge.className = "text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full font-semibold border";
+      badge.innerText = "未登入";
+    }
+
+    function uploadScoreToGAS() {
+      var status = document.getElementById('gas-status');
+
+      if(!currentStudent) {
+        status.className = "text-xs font-semibold text-red-500";
+        status.innerText = "請先完成學生登入後，再送出成績！";
+        return;
+      }
+
+      var solvedCount = solvedSet.size;
+      var totalScore = 0;
+      challengesData.forEach(function(c) {
+        if (solvedSet.has(c.id)) totalScore += c.points;
+      });
+
+      status.className = "text-xs font-semibold text-blue-600";
+      status.innerText = "成績資料傳送至 GAS 系統中...";
+
+      fetch(GAS_WEB_APP_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify({
+          action: "submitScore",
+          studentClass: currentStudent.studentClass,
+          studentSeat: currentStudent.studentSeat,
+          studentName: currentStudent.studentName,
+          solvedCount: solvedCount,
+          totalScore: totalScore
+        })
+      })
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        if(data.success) {
+          status.className = "text-xs font-semibold text-emerald-600";
+          status.innerText = "成績已成功儲存至 Google 試算表！(" + new Date().toLocaleTimeString() + ")";
+        } else {
+          status.className = "text-xs font-semibold text-red-500";
+          status.innerText = "儲存失敗: " + data.message;
+        }
+      })
+      .catch(function() {
+        status.className = "text-xs font-semibold text-red-500";
+        status.innerText = "[ERROR] 無法連線至 GAS 後端。";
+      });
+    }
+
+    /* Modal / 沙箱 / 工具箱支援腳本 */
     function openChalModal(id) {
       currentChal = challengesData.find(function(c) { return c.id === id; });
       if(!currentChal) return;
@@ -779,56 +924,7 @@
       });
     }
 
-    function uploadScoreToGAS() {
-      var sClass = document.getElementById('student-class').value.trim();
-      var sSeat = document.getElementById('student-seat').value.trim();
-      var sName = document.getElementById('student-name').value.trim();
-      var status = document.getElementById('gas-status');
-
-      if(!sClass || !sSeat || !sName) {
-        status.className = "text-xs font-semibold text-red-500";
-        status.innerText = "請先完整填寫班級、座號與姓名！";
-        return;
-      }
-
-      var solvedCount = solvedSet.size;
-      var totalScore = 0;
-      challengesData.forEach(function(c) {
-        if (solvedSet.has(c.id)) totalScore += c.points;
-      });
-
-      status.className = "text-xs font-semibold text-blue-600";
-      status.innerText = "成績資料傳送至 GAS 系統中...";
-
-      fetch(GAS_WEB_APP_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain' },
-        body: JSON.stringify({
-          action: "submitScore",
-          studentClass: sClass,
-          studentSeat: sSeat,
-          studentName: sName,
-          solvedCount: solvedCount,
-          totalScore: totalScore
-        })
-      })
-      .then(function(res) { return res.json(); })
-      .then(function(data) {
-        if(data.success) {
-          status.className = "text-xs font-semibold text-emerald-600";
-          status.innerText = "成績已成功儲存至 Google 試算表！(" + new Date().toLocaleTimeString() + ")";
-        } else {
-          status.className = "text-xs font-semibold text-red-500";
-          status.innerText = "儲存失敗: " + data.message;
-        }
-      })
-      .catch(function() {
-        status.className = "text-xs font-semibold text-red-500";
-        status.innerText = "[ERROR] 無法連線至 GAS 後端。";
-      });
-    }
-
-    /* 7大題型工具箱 JavaScript Functions */
+    /* 解題工具箱 Functions */
     function runToolCaesar() {
       var text = document.getElementById('tool-classic-input').value;
       var shift = parseInt(document.getElementById('tool-caesar-shift').value) || 0;
@@ -952,7 +1048,7 @@
       document.getElementById('tool-bf-output').innerText = output || "(無輸出或輸出無法顯示)";
     }
 
-    /* 教師 Modal 專區邏輯 (包含新增之 更新、單筆/全刪、登出) */
+    /* 教師 Modal 專區邏輯 */
     function openTeacherModal() {
       document.getElementById('teacher-modal').classList.remove('hidden');
     }
@@ -978,7 +1074,7 @@
       .then(function(res) { return res.json(); })
       .then(function(data) {
         if(data.success) {
-          currentTeacherPass = pass; // 保存已驗證的密碼
+          currentTeacherPass = pass;
           err.classList.add('hidden');
           document.getElementById('teacher-lock-screen').classList.add('hidden');
           document.getElementById('teacher-content').classList.remove('hidden');
@@ -1039,7 +1135,7 @@
       tbody.innerHTML = '';
       document.getElementById('student-record-count').innerText = records.length;
 
-      records.forEach(function(r, index) {
+      records.forEach(function(r) {
         var tr = document.createElement('tr');
         tr.className = "hover:bg-slate-50";
         tr.innerHTML = '<td class="p-2.5 font-mono text-slate-500">' + r.time + '</td>' +
