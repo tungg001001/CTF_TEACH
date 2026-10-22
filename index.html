@@ -130,42 +130,113 @@
       </div>
     </section>
 
-    <!-- Tab 2: Guides -->
+    <!-- Tab 2: Guides (詳細解說版) -->
     <section id="tab-guide" class="tab-content hidden space-y-8">
       <div class="text-center max-w-4xl mx-auto space-y-2">
         <h2 class="text-3xl font-extrabold text-slate-900">7 大 CTF 題型深度系統化解析</h2>
         <p class="text-slate-600 text-sm">深入探索各領域漏洞發生的底層機制、攻擊手法與常用破解分析工具。</p>
       </div>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3">
-          <h3 class="text-lg font-bold text-slate-900">1. 古典密碼學</h3>
-          <p class="text-xs text-slate-600">字元位移、單/多表替換、字母頻率分析。</p>
+      <div class="grid lg:grid-cols-2 gap-6">
+        
+        <!-- 1. 古典密碼學 -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+          <div class="flex items-center space-x-3 border-b pb-3">
+            <div class="w-9 h-9 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center font-bold">1</div>
+            <h3 class="text-lg font-bold text-slate-900">古典密碼学 (Classical Cryptography)</h3>
+          </div>
+          <div class="space-y-2 text-xs text-slate-600 leading-relaxed">
+            <p><strong>底層原理：</strong> 建立在字元的「代換」與「位置置換」之上，不涉及高深數論，適合紙筆解密。</p>
+            <p><strong>常見漏洞：</strong> 存在嚴重的「字母頻率特徵」。多表代換若金鑰過短，可透過 Kasiski 測試估算長度破解。</p>
+            <p><strong>涵蓋題型：</strong> 凱撒移位密碼 (ROT13/Brute-force)、維吉尼亞多表密碼、籬笆位移密碼。</p>
+            <p><strong>常用工具：</strong> CyberChef, dcode.fr, Python 腳本。</p>
+          </div>
         </div>
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3">
-          <h3 class="text-lg font-bold text-slate-900">2. 現代密碼學</h3>
-          <p class="text-xs text-slate-600">RSA 質因數分解、AES-CTR 金鑰流重用、MD5 弱型態碰撞。</p>
+
+        <!-- 2. 現代密碼學 -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+          <div class="flex items-center space-x-3 border-b pb-3">
+            <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold">2</div>
+            <h3 class="text-lg font-bold text-slate-900">現代密碼學 (Modern Cryptography)</h3>
+          </div>
+          <div class="space-y-2 text-xs text-slate-600 leading-relaxed">
+            <p><strong>底層原理：</strong> 建立在計算複雜性理論與數論難題之上，取決於金鑰長度與隨機性。</p>
+            <p><strong>常見漏洞：</strong> RSA 質數 p, q 過小遭分解；AES-CTR Nonce 重用導致 Key Stream 抵銷；MD5 弱型態 (0e) 碰撞。</p>
+            <p><strong>涵蓋題型：</strong> RSA 質因數分解、AES 金鑰流重用分析、MD5 弱型態比較繞過。</p>
+            <p><strong>常用工具：</strong> RsaCtfTool, Factordb, Hashcat, pycryptodome。</p>
+          </div>
         </div>
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3">
-          <h3 class="text-lg font-bold text-slate-900">3. Web 漏洞利用</h3>
-          <p class="text-xs text-slate-600">SQL Injection 萬能密碼、Reflected XSS 腳本注入、LFI 路徑穿越。</p>
+
+        <!-- 3. Web 漏洞利用 -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+          <div class="flex items-center space-x-3 border-b pb-3">
+            <div class="w-9 h-9 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center font-bold">3</div>
+            <h3 class="text-lg font-bold text-slate-900">Web 漏洞利用 (Web Exploitation)</h3>
+          </div>
+          <div class="space-y-2 text-xs text-slate-600 leading-relaxed">
+            <p><strong>底層原理：</strong> Web 應用未對使用者輸入進行驗證，導致輸入資料被伺服器或資料庫當成指令執行。</p>
+            <p><strong>常見漏洞：</strong> SQL 拼接語法繞過；XSS 注入觸發跨站腳本竊取 Cookie；LFI 相對路徑穿越讀取後端原始碼。</p>
+            <p><strong>涵蓋題型：</strong> SQL Injection 萬能密碼、Reflected XSS 腳本注入、LFI 本地檔案包含。</p>
+            <p><strong>常用工具：</strong> Burp Suite, sqlmap, dirsearch, Postman。</p>
+          </div>
         </div>
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3">
-          <h3 class="text-lg font-bold text-slate-900">4. Pwn 二進位漏洞</h3>
-          <p class="text-xs text-slate-600">Stack Buffer Overflow, Format String 記憶體洩漏, Heap UAF。</p>
+
+        <!-- 4. Pwn 二進位漏洞利用 -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+          <div class="flex items-center space-x-3 border-b pb-3">
+            <div class="w-9 h-9 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center font-bold">4</div>
+            <h3 class="text-lg font-bold text-slate-900">Pwn 二進位漏洞利用 (Binary Exploitation)</h3>
+          </div>
+          <div class="space-y-2 text-xs text-slate-600 leading-relaxed">
+            <p><strong>底層原理：</strong> C/C++ 等底層程式缺乏邊界檢查或記憶體管理不當，導致堆疊結構被破壞。</p>
+            <p><strong>常見漏洞：</strong> 堆疊溢位覆寫 Return Address；格式化字串 (%p/%x) 窺探記憶體；UAF 記憶體懸空指標重用。</p>
+            <p><strong>涵蓋題型：</strong> Stack Buffer Overflow, Format String Leak, Heap Use-After-Free。</p>
+            <p><strong>常用工具：</strong> Pwntools, gdb (pwndbg/gef), checksec。</p>
+          </div>
         </div>
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3">
-          <h3 class="text-lg font-bold text-slate-900">5. 逆向工程</h3>
-          <p class="text-xs text-slate-600">XOR 邏輯、x86 ASM 組合語言分析、UPX 殼解壓縮與字串搜尋。</p>
+
+        <!-- 5. 逆向工程 -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+          <div class="flex items-center space-x-3 border-b pb-3">
+            <div class="w-9 h-9 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center font-bold">5</div>
+            <h3 class="text-lg font-bold text-slate-900">逆向工程 (Reverse Engineering)</h3>
+          </div>
+          <div class="space-y-2 text-xs text-slate-600 leading-relaxed">
+            <p><strong>底層原理：</strong> 將可執行檔反組譯或反編譯為組合語言，分析演算法與驗證金鑰邏輯。</p>
+            <p><strong>常見漏洞：</strong> 比對函數 (CMP/strcmp) 缺乏混淆保護；未脫殼的執行檔可被直接搜尋字串。</p>
+            <p><strong>涵蓋題型：</strong> XOR 加密算法逆向、x86 ASM 組合語言邏輯分析、UPX 脫殼與字串搜尋。</p>
+            <p><strong>常用工具：</strong> IDA Pro, Ghidra, x64dbg, Cutter, UPX。</p>
+          </div>
         </div>
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3">
-          <h3 class="text-lg font-bold text-slate-900">6. 數位鑑識</h3>
-          <p class="text-xs text-slate-600">PNG Magic Header 修復、Wireshark HTTP 封包、Volatility 記憶體快取。</p>
+
+        <!-- 6. 數位鑑識 -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+          <div class="flex items-center space-x-3 border-b pb-3">
+            <div class="w-9 h-9 rounded-xl bg-teal-100 text-teal-600 flex items-center justify-center font-bold">6</div>
+            <h3 class="text-lg font-bold text-slate-900">數位鑑識 (Digital Forensics)</h3>
+          </div>
+          <div class="space-y-2 text-xs text-slate-600 leading-relaxed">
+            <p><strong>底層原理：</strong> 從記憶體快取、網路封包 (pcap) 或損毀檔案中，還原攻擊者留下的數位痕跡。</p>
+            <p><strong>常見漏洞：</strong> 傳輸敏感資訊未加密；損毀之圖檔 Magic Header 可被修復；記憶體殘留系統憑證。</p>
+            <p><strong>涵蓋題型：</strong> PNG Magic Header 16進位修復、Wireshark HTTP 封包提取、Memory Dump 記憶體分析。</p>
+            <p><strong>常用工具：</strong> Wireshark, Volatility, HxD, FTK Imager, foremost。</p>
+          </div>
         </div>
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3">
-          <h3 class="text-lg font-bold text-slate-900">7. MISC 雜項與綜合</h3>
-          <p class="text-xs text-slate-600">LSB 圖片最低位元隱寫術、Brainfuck 直譯器、AI Prompt Injection 越獄。</p>
+
+        <!-- 7. MISC 雜項與綜合 -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4 lg:col-span-2">
+          <div class="flex items-center space-x-3 border-b pb-3">
+            <div class="w-9 h-9 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold">7</div>
+            <h3 class="text-lg font-bold text-slate-900">MISC 雜項與綜合 (Miscellaneous)</h3>
+          </div>
+          <div class="space-y-2 text-xs text-slate-600 leading-relaxed">
+            <p><strong>底層原理：</strong> 涵蓋無法歸類的綜合性安全技巧，包含圖片隱寫、特異語言與 AI 越獄等新興領域。</p>
+            <p><strong>常見漏洞：</strong> 圖片 LSB 最低位元藏有隱密訊息；Esolang 邏輯洩漏；LLM 未對 Prompt 進行適當邊界過濾。</p>
+            <p><strong>涵蓋題型：</strong> LSB 最低位元隱寫術、Brainfuck 直譯器執行、AI Prompt Injection 越獄測試。</p>
+            <p><strong>常用工具：</strong> zsteg, Stegsolve, CyberChef, Python Pillow 庫。</p>
+          </div>
         </div>
+
       </div>
     </section>
 
@@ -369,7 +440,6 @@
       renderChallenges();
     }
 
-    // 修正卡片渲染邏輯（移除未定義欄位引發的錯誤）
     function renderChallenges() {
       var container = document.getElementById('challenge-container');
       if(!container) return;
